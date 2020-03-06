@@ -19,10 +19,10 @@ namespace QuadribolPresentationLayer.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult Cadastrar()
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Cadastrar()
+        {
+            return View();
+        }
     }
 }
