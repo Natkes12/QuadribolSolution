@@ -13,4 +13,5 @@ namespace Entity
         public bool Disponivel { get; set; }
         public bool EhAtivo { get; set; }
     }
+
 }
