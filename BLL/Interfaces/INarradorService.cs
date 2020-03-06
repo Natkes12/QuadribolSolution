@@ -8,7 +8,7 @@ namespace BLL.Interfaces
 {
     public interface INarradorService
     {
-        Task Insert(Narrador narrador);
-        Task<List<Narrador>> GetNarrador();
+        Task<Response> Insert(Narrador narrador);
+        Task<DataResponse<Narrador>> GetNarrador();
     }
 }
