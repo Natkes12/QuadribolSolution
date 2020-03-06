@@ -3,6 +3,7 @@ using BLL.Interfaces;
 using Entity;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace BLL
@@ -13,7 +14,17 @@ namespace BLL
         {
             Response response = new Response();
 
-            if (competidor.Escolaridade < 4)
+            if (string.IsNullOrWhiteSpace(competidor.Nome))
+            {
+                response.Erros.Add("O nome do competidor deve ser informado.");
+            }
+
+            if (string.IsNullOrWhiteSpace(competidor.Escolaridade))
+            {
+                response.Erros.Add("A escolaridade deve ser informada.");
+            }
+
+            if (competidor.Escolaridade.Length < 4)
             {
                 response.Erros.Add("O competidor deve ter escolaridade de no mínimo 4.");
             }
@@ -48,7 +59,7 @@ namespace BLL
             List<Competidor> competidor = new List<Competidor>();
             DataResponse<Competidor> response = new DataResponse<Competidor>();
 
-            if (competidor <= 0)
+            if (competidor.Count <= 0)
             {
                 response.Erros.Add("Nenhum competidor adicionado!");
                 response.Sucesso = false;

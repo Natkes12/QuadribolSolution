@@ -8,17 +8,16 @@ using System.Threading.Tasks;
 
 namespace BLL.Impl
 {
-    class TimeService : ITimeService
+    public class NarradorService : INarradorService
     {
-        public Task Insert(Time time)
+        public Task Insert(Narrador narrador)
         {
             Response response = new Response();
 
-            if (time.Competidor.Length < 7)
+            if (string.IsNullOrWhiteSpace(narrador.Nome))
             {
-                response.Erros.Add("O time deve ter 7 competidores!");
+                response.Erros.Add("O nome do narrador deve ser informado.");
             }
-
 
             if (response.Erros.Count > 0)
             {
@@ -44,14 +43,15 @@ namespace BLL.Impl
                 return response;
             }
         }
-        public Task<List<Time>> GetTimes()
-        {
-            List<Time> time = new List<Time>();
-            DataResponse<Competidor> response = new DataResponse<Competidor>();
 
-            if (time.Count <= 0)
+        public Task<List<Narrador>> GetNarrador()
+        {
+            List<Narrador> narrador = new List<Narrador>();
+            DataResponse<Narrador> response = new DataResponse<Narrador>();
+
+            if (narrador.Count <= 0)
             {
-                response.Erros.Add("Nenhum competidor adicionado!");
+                response.Erros.Add("Nenhum narrador adicionado!");
                 response.Sucesso = false;
                 return response;
             }
@@ -67,7 +67,10 @@ namespace BLL.Impl
                 File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
                 throw new Exception("Erro no banco de dados, contate o administrador");
             }
-        }
 
+        }
+    }
+
+       
     }
 }
