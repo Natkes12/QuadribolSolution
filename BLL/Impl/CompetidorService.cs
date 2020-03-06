@@ -1,6 +1,7 @@
 ﻿using BLL.Impl;
 using BLL.Interfaces;
 using DAO;
+using DAO.Interfaces;
 using Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,8 +13,12 @@ namespace BLL
 {
     public class CompetidorService : ICompetidorService
     {
+        private ICompetidorRepository _competidorRepository;
 
-        private CompetidorRepository repository = new CompetidorRepository();
+        public CompetidorService(ICompetidorRepository competidorRepository)
+        {
+            this._competidorRepository = competidorRepository;
+        }
 
         public async Task<Response> Insert(Competidor competidor)
         {
@@ -42,7 +47,7 @@ namespace BLL
 
             try
             {
-                repository.Insert(competidor);
+                await _competidorRepository.Insert(competidor);
                 response.Sucesso = true;
                 return response;
             }
@@ -68,7 +73,7 @@ namespace BLL
             }
             try
             {
-                return await repository.GetCompetidores();
+                return await _competidorRepository.GetCompetidores();
             }
             catch (Exception ex)
             {

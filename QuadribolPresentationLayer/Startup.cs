@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL;
+using BLL.Interfaces;
 using DAO;
 using DAO.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -30,8 +32,8 @@ namespace QuadribolPresentationLayer
                 options => options.UseSqlServer(Configuration.GetConnectionString("QuadribolDbConnection")));
 
             services.AddControllersWithViews();
-            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
-            //services.AddTransient<IUsuarioService, UsuarioService>();
+            services.AddTransient<ICompetidorRepository, CompetidorRepository>();
+            services.AddTransient<ICompetidorService, CompetidorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

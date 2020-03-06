@@ -9,6 +9,13 @@ namespace DAO
 {
     public class CompetidorRepository : ICompetidorRepository
     {
+        private readonly QuadribolContext context;
+
+        public CompetidorRepository(QuadribolContext context)
+        {
+            this.context = context;
+        }
+
         public async Task<DataResponse<Competidor>> GetCompetidores()
         {
             throw new NotImplementedException();
