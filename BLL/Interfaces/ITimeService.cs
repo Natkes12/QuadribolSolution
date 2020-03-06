@@ -8,7 +8,7 @@ namespace BLL.Interfaces
 {
     public interface ITimeService
     {
-        Task Insert(Time time);
-        Task<List<Time>> GetTimes();
+        Task<Response> Insert(Time time);
+        Task<DataResponse<Time>> GetTimes();
     }
 }

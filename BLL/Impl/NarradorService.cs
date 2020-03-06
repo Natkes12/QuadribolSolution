@@ -1,5 +1,7 @@
 ﻿using BLL.Interfaces;
+using DAO;
 using Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +12,7 @@ namespace BLL.Impl
 {
     public class NarradorService : INarradorService
     {
-        public Task Insert(Narrador narrador)
+        public async Task<Response> Insert(Narrador narrador)
         {
             Response response = new Response();
 
@@ -29,7 +31,7 @@ namespace BLL.Impl
             {
                 using (QuadribolContext db = new QuadribolContext())
                 {
-                    db.Competidores.Add(item);
+                    db.Narradores.Add(narrador);
                     db.SaveChanges();
                 }
                 response.Sucesso = true;
@@ -44,7 +46,7 @@ namespace BLL.Impl
             }
         }
 
-        public Task<List<Narrador>> GetNarrador()
+        public async Task<DataResponse<Narrador>> GetNarrador()
         {
             List<Narrador> narrador = new List<Narrador>();
             DataResponse<Narrador> response = new DataResponse<Narrador>();
@@ -59,7 +61,8 @@ namespace BLL.Impl
             {
                 using (QuadribolContext context = new QuadribolContext())
                 {
-                    return await context.Competidores.ToListAsync();
+                    response.Data = context.Narradores.ToListAsync();
+                    return response;
                 }
             }
             catch (Exception ex)
@@ -73,4 +76,3 @@ namespace BLL.Impl
 
        
     }
-}

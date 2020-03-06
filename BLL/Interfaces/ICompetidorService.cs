@@ -8,7 +8,7 @@ namespace BLL.Interfaces
 {
     public interface ICompetidorService
     {
-       Task Insert(Competidor competidor);
-       Task<List<Competidor>> GetCompetidores();
+       Task<Response> Insert(Competidor competidor);
+       Task<DataResponse<Competidor>> GetCompetidores();
     }
 }

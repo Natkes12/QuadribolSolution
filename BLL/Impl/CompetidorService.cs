@@ -1,6 +1,8 @@
 ﻿using BLL.Impl;
 using BLL.Interfaces;
+using DAO;
 using Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +12,7 @@ namespace BLL
 {
     public class CompetidorService : ICompetidorService
     {
-        public Task Insert(Competidor competidor)
+        public async Task<Response> Insert(Competidor competidor)
         {
             Response response = new Response();
 
@@ -39,7 +41,7 @@ namespace BLL
             {
                 using (QuadribolContext db = new QuadribolContext())
                 {
-                    db.Competidores.Add(item);
+                    db.Competidores.Add(competidor);
                     db.SaveChanges();
                 }
                 response.Sucesso = true;
@@ -54,7 +56,7 @@ namespace BLL
             }
 
         }
-        public Task<List<Competidor>> GetCompetidores()
+        public async Task<DataResponse<Competidor>> GetCompetidores()
         {
             List<Competidor> competidor = new List<Competidor>();
             DataResponse<Competidor> response = new DataResponse<Competidor>();
@@ -69,7 +71,8 @@ namespace BLL
             {
                 using (QuadribolContext context = new QuadribolContext())
                 {
-                    return await context.Competidores.ToListAsync();
+                    response.Data = context.Competidores.ToListAsync();
+                    return response;
                 }
             }
             catch (Exception ex)

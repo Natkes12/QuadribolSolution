@@ -1,5 +1,7 @@
 ﻿using BLL.Interfaces;
+using DAO;
 using Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace BLL.Impl
 {
-    class TimeService : ITimeService
+    public class TimeService : ITimeService
     {
-        public Task Insert(Time time)
+        public async Task<Response> Insert(Time time)
         {
             Response response = new Response();
 
@@ -30,7 +32,7 @@ namespace BLL.Impl
             {
                 using (QuadribolContext db = new QuadribolContext())
                 {
-                    db.Competidores.Add(item);
+                    db.Times.Add(time);
                     db.SaveChanges();
                 }
                 response.Sucesso = true;
@@ -44,14 +46,14 @@ namespace BLL.Impl
                 return response;
             }
         }
-        public Task<List<Time>> GetTimes()
+        public async Task<DataResponse<Time>> GetTimes()
         {
             List<Time> time = new List<Time>();
-            DataResponse<Competidor> response = new DataResponse<Competidor>();
+            DataResponse<Time> response = new DataResponse<Time>();
 
             if (time.Count <= 0)
             {
-                response.Erros.Add("Nenhum competidor adicionado!");
+                response.Erros.Add("Nenhum time adicionado!");
                 response.Sucesso = false;
                 return response;
             }
@@ -59,7 +61,8 @@ namespace BLL.Impl
             {
                 using (QuadribolContext context = new QuadribolContext())
                 {
-                    return await context.Competidores.ToListAsync();
+                    response.Data = context.Times.ToListAsync();
+                    return response;
                 }
             }
             catch (Exception ex)
