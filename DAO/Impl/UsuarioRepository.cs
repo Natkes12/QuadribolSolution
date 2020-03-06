@@ -1,5 +1,6 @@
 ﻿using DAO.Interfaces;
 using Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,9 +16,15 @@ namespace DAO
         {
             this._context = context;
         }
-        public Task<Response> Autenticar(string email, string senha)
+        public async Task<Usuario> Autenticar(string email, string senha)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            Usuario user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email && u.Senha == senha);
+            if (user == null)
+            {
+                throw new Exception("Email e/ou senha inválidos");
+            }
+            return user;
         }
 
         public async Task<Response> Insert(Usuario usuario)
