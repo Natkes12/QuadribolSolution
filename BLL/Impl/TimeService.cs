@@ -1,5 +1,6 @@
 ﻿using BLL.Interfaces;
 using DAO;
+using DAO.Interfaces;
 using Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,6 +13,12 @@ namespace BLL.Impl
 {
     public class TimeService : ITimeService
     {
+        private ITimeRepository _timeRepository;
+
+        public TimeService(ITimeRepository timeRepository)
+        {
+            this._timeRepository = timeRepository;
+        }
         public async Task<Response> Insert(Time time)
         {
             Response response = new Response();
@@ -30,11 +37,7 @@ namespace BLL.Impl
 
             try
             {
-                using (QuadribolContext db = new QuadribolContext())
-                {
-                    db.Times.Add(time);
-                    db.SaveChanges();
-                }
+                await _timeRepository.Insert(time);
                 response.Sucesso = true;
                 return response;
             }
@@ -59,14 +62,11 @@ namespace BLL.Impl
             }
             try
             {
-                using (QuadribolContext context = new QuadribolContext())
-                {
-                    response.Data = context.Times.ToListAsync();
-                    return response;
-                }
+                return await _timeRepository.GetTimes();
             }
             catch (Exception ex)
             {
+                response.Sucesso = false;
                 File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
                 throw new Exception("Erro no banco de dados, contate o administrador");
             }

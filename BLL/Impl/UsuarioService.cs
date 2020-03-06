@@ -1,8 +1,6 @@
 ﻿using BLL.Interfaces;
-using DAO;
 using DAO.Interfaces;
 using Entity;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,21 +9,22 @@ using System.Threading.Tasks;
 
 namespace BLL.Impl
 {
-    public class NarradorService : INarradorService
+    public class UsuarioService : IUsuarioService
     {
-        private INarradorRepository _narradorRepository;
+        private IUsuarioRepository _usuarioRepository;
 
-        public NarradorService(INarradorRepository narradorRepository)
+        public UsuarioService(IUsuarioRepository usuarioRepository)
         {
-            this._narradorRepository = narradorRepository;
+            this._usuarioRepository = usuarioRepository;
         }
-        public async Task<Response> Insert(Narrador narrador)
+
+        public async Task<Response> Insert(Usuario usuario)
         {
             Response response = new Response();
 
-            if (string.IsNullOrWhiteSpace(narrador.Nome))
+            if (string.IsNullOrWhiteSpace(usuario.Nome))
             {
-                response.Erros.Add("O nome do narrador deve ser informado.");
+                response.Erros.Add("O nome do usuário deve ser informado.");
             }
 
             if (response.Erros.Count > 0)
@@ -36,7 +35,7 @@ namespace BLL.Impl
 
             try
             {
-                await _narradorRepository.Insert(narrador);
+                await _usuarioRepository.Insert(usuario);
                 response.Sucesso = true;
                 return response;
             }
@@ -49,20 +48,20 @@ namespace BLL.Impl
             }
         }
 
-        public async Task<DataResponse<Narrador>> GetNarrador()
+        public async Task<DataResponse<Usuario>> GetUsuarios()
         {
-            List<Narrador> narrador = new List<Narrador>();
-            DataResponse<Narrador> response = new DataResponse<Narrador>();
+            List<Usuario> usuario = new List<Usuario>();
+            DataResponse<Usuario> response = new DataResponse<Usuario>();
 
-            if (narrador.Count <= 0)
+            if (usuario.Count <= 0)
             {
-                response.Erros.Add("Nenhum narrador adicionado!");
+                response.Erros.Add("Nenhum usuário adicionado!");
                 response.Sucesso = false;
                 return response;
             }
             try
             {
-                return await _narradorRepository.GetNarradores();
+                return await _usuarioRepository.GetUsuarios();
             }
             catch (Exception ex)
             {
@@ -70,9 +69,8 @@ namespace BLL.Impl
                 File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
                 throw new Exception("Erro no banco de dados, contate o administrador");
             }
-
         }
-    }
 
-       
+
     }
+}
