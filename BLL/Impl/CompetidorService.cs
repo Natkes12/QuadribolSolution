@@ -12,6 +12,9 @@ namespace BLL
 {
     public class CompetidorService : ICompetidorService
     {
+
+        private CompetidorRepository repository = new CompetidorRepository();
+
         public async Task<Response> Insert(Competidor competidor)
         {
             Response response = new Response();
@@ -39,11 +42,7 @@ namespace BLL
 
             try
             {
-                using (QuadribolContext db = new QuadribolContext())
-                {
-                    db.Competidores.Add(competidor);
-                    db.SaveChanges();
-                }
+                repository.Insert(competidor);
                 response.Sucesso = true;
                 return response;
             }
@@ -69,14 +68,11 @@ namespace BLL
             }
             try
             {
-                using (QuadribolContext context = new QuadribolContext())
-                {
-                    response.Data = context.Competidores.ToListAsync();
-                    return response;
-                }
+                return await repository.GetCompetidores();
             }
             catch (Exception ex)
             {
+                response.Sucesso = false;
                 File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
                 throw new Exception("Erro no banco de dados, contate o administrador");
             }
