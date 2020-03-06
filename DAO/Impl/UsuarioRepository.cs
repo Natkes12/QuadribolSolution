@@ -9,11 +9,11 @@ namespace DAO
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private readonly QuadribolContext context;
+        private readonly QuadribolContext _context;
 
         public UsuarioRepository(QuadribolContext context)
         {
-            this.context = context;
+            this._context = context;
         }
         public Task<Response> Autenticar(string email, string senha)
         {
@@ -26,8 +26,8 @@ namespace DAO
 
             try
             {
-                context.Usuarios.Add(usuario);
-                await context.SaveChangesAsync();
+                _context.Usuarios.Add(usuario);
+                await _context.SaveChangesAsync();
                 response.Sucesso = true;
             }
             catch(Exception ex)
