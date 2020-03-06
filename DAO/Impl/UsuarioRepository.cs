@@ -27,6 +27,7 @@ namespace DAO
             try
             {
                 context.Usuarios.Add(usuario);
+                await context.SaveChangesAsync();
                 response.Sucesso = true;
             }
             catch(Exception ex)

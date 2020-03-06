@@ -30,8 +30,8 @@ namespace QuadribolPresentationLayer
                 options => options.UseSqlServer(Configuration.GetConnectionString("QuadribolDbConnection")));
 
             services.AddControllersWithViews();
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-            services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            //services.AddTransient<IUsuarioService, UsuarioService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
