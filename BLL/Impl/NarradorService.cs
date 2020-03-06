@@ -1,5 +1,6 @@
 ﻿using BLL.Interfaces;
 using DAO;
+using DAO.Interfaces;
 using Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,6 +13,12 @@ namespace BLL.Impl
 {
     public class NarradorService : INarradorService
     {
+        private INarradorRepository _narradorRepository;
+
+        public NarradorService(INarradorRepository narradorRepository)
+        {
+            this._narradorRepository = narradorRepository;
+        }
         public async Task<Response> Insert(Narrador narrador)
         {
             Response response = new Response();
@@ -29,11 +36,7 @@ namespace BLL.Impl
 
             try
             {
-                using (QuadribolContext db = new QuadribolContext())
-                {
-                    db.Narradores.Add(narrador);
-                    db.SaveChanges();
-                }
+                await _narradorRepository.Insert(narrador);
                 response.Sucesso = true;
                 return response;
             }
@@ -59,14 +62,11 @@ namespace BLL.Impl
             }
             try
             {
-                using (QuadribolContext context = new QuadribolContext())
-                {
-                    response.Data = context.Narradores.ToListAsync();
-                    return response;
-                }
+                return await _narradorRepository.GetNarradores();
             }
             catch (Exception ex)
             {
+                response.Sucesso = false;
                 File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
                 throw new Exception("Erro no banco de dados, contate o administrador");
             }
