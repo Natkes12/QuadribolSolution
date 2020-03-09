@@ -9,6 +9,5 @@ namespace BLL.Interfaces
     public interface IUsuarioService
     {
         Task<Response> Insert(Usuario usuario);
-        Task<DataResponse<Usuario>> GetUsuarios();
     }
 }

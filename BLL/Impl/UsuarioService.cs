@@ -47,30 +47,5 @@ namespace BLL.Impl
                 return response;
             }
         }
-
-        public async Task<DataResponse<Usuario>> GetUsuarios()
-        {
-            List<Usuario> usuario = new List<Usuario>();
-            DataResponse<Usuario> response = new DataResponse<Usuario>();
-
-            if (usuario.Count <= 0)
-            {
-                response.Erros.Add("Nenhum usuário adicionado!");
-                response.Sucesso = false;
-                return response;
-            }
-            try
-            {
-                return await _usuarioRepository.GetUsuarios();
-            }
-            catch (Exception ex)
-            {
-                response.Sucesso = false;
-                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
-                throw new Exception("Erro no banco de dados, contate o administrador");
-            }
-        }
-
-
     }
 }
