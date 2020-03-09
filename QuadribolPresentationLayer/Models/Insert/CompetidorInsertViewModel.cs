@@ -10,7 +10,7 @@ namespace QuadribolPresentationLayer.Models.Insert
     {
         public string Nome { get; set; }
         public Casa Casa { get; set; }
-        public string Escolaridade { get; set; }
+        public Escolaridade Escolaridade { get; set; }
         public Funcao Funcao { get; set; }
     }
 }

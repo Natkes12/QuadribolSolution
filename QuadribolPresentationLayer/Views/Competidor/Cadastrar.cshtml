@@ -63,5 +63,35 @@
         </div>
 
     </form>
-
 </div>
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#BotaoEnviar").click(function (e) {
+
+                var nome = $("#Nome").val();
+
+                var sucesso = true;
+
+                if (nome == "") {
+                    $("#erroNome").html("O nome do usuário deve ser informado.");
+                    sucesso = false;
+                }
+                else if (nome.length < 5 || nome.length > 50) {
+                    $("#erroNome").html("O nome do usuário deve conter entre 2 e 50 caracteres.");
+                    sucesso = false;
+                }
+                else {
+                    $("#erroNome").html("");
+                }              
+
+            });
+
+        });
+    </script>
+
+}
