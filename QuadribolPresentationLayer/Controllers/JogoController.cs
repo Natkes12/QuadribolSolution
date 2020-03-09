@@ -17,12 +17,14 @@ namespace QuadribolPresentationLayer.Controllers
     {
 
         private IJogoService _jogoService;
-        TimeService service;
+        private TimeService timeService;
+        private NarradorService narradorService;
 
-        public JogoController(IJogoService jogo, ITimeRepository time)
+        public JogoController(IJogoService jogo, ITimeRepository time, INarradorRepository narrador)
         {
             this._jogoService = jogo;
-            this.service = new TimeService(time);
+            this.timeService = new TimeService(time);
+            this.narradorService = new NarradorService(narrador);
         }
 
 
@@ -33,16 +35,20 @@ namespace QuadribolPresentationLayer.Controllers
 
         public async Task<IActionResult> Cadastrar()
         {
-            DataResponse<Time> times = await service.GetTimes();
+            DataResponse<Time> times = await timeService.GetTimes();
+            DataResponse<Narrador> narradores = await narradorService.GetNarrador();
 
             var configuration = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Time, TimeQueryViewModel>();
+                cfg.CreateMap<Narrador, NarradorQueryViewModel>();
             });
             IMapper mapper = configuration.CreateMapper();
-            List<TimeQueryViewModel> dados = mapper.Map<List<TimeQueryViewModel>>(times);
+            List<TimeQueryViewModel> dadosTime = mapper.Map<List<TimeQueryViewModel>>(times.Data);
+            List<TimeQueryViewModel> dadosNarrador = mapper.Map<List<TimeQueryViewModel>>(narradores.Data);
 
-            ViewBag.Times = dados;
+            ViewBag.Times = dadosTime;
+            ViewBag.Narradores = dadosNarrador;
 
             return View();
         }

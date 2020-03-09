@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL;
+using BLL.Impl;
 using BLL.Interfaces;
 using DAO;
+using DAO.Impl;
 using DAO.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +36,14 @@ namespace QuadribolPresentationLayer
             services.AddControllersWithViews();
             services.AddTransient<ICompetidorRepository, CompetidorRepository>();
             services.AddTransient<ICompetidorService, CompetidorService>();
+            services.AddTransient<IJogoRepository, JogoRepository>();
+            services.AddTransient<IJogoService, JogoService>();
+            services.AddTransient<INarradorRepository, NarradorRepository>();
+            services.AddTransient<INarradorService, NarradorService>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<IUsuarioService, UsuarioService>();
+            services.AddTransient<ITimeRepository, TimeRepository>();
+            services.AddTransient<ITimeService, TimeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
