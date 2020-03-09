@@ -8,16 +8,17 @@ using QuadribolPresentationLayer.Models.Insert;
 
 namespace QuadribolPresentationLayer.Controllers
 {
-    public class TimeController : Controller
+    public class JogoController : Controller
     {
-        private ITimeService _timeService;
 
-        public TimeController(ITimeService time)
+        private IJogoService _jogoService;
+
+        public JogoController(IJogoService jogo)
         {
-            this._timeService = time;
+            this._jogoService = jogo;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
@@ -28,7 +29,7 @@ namespace QuadribolPresentationLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Cadastrar(TimeInsertViewModel viewModel)
+        public async Task<IActionResult> Cadastrar(JogoInsertViewModel viewModel)
         {
             return View();
         }
