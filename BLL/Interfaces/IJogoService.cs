@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Interfaces
 {
-    interface IJogoService
+    public interface IJogoService
     {
         Task<Response> Insert(Jogo jogo);
         Task<DataResponse<Jogo>> GetJogos();

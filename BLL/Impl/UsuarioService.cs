@@ -26,6 +26,20 @@ namespace BLL.Impl
             {
                 response.Erros.Add("O nome do usuário deve ser informado.");
             }
+            else if (usuario.Nome.Length < 2 || usuario.Nome.Length > 50)
+            {
+                response.Erros.Add("O nome do usuário deve conter entre 2 e 50 caracteres.");
+            }
+
+            if (string.IsNullOrWhiteSpace(usuario.Senha))
+            {
+                response.Erros.Add("A senha do usuário deve ser informado.");
+            }
+            if (usuario.Senha.Length < 2 || usuario.Senha.Length > 15)
+            {
+                response.Erros.Add("A senha do usuário deve conter entre 2 e 15 caracteres.");
+            }
+
 
             if (response.Erros.Count > 0)
             {
