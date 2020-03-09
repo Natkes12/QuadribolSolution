@@ -9,6 +9,6 @@ namespace DAO.Interfaces
     public interface IUsuarioRepository
     {
         Task<Response> Insert(Usuario usuario);
-        Task<Response> Autenticar(string email, string senha);
+        Task<Usuario> Autenticar(string email, string senha);
     }
 }

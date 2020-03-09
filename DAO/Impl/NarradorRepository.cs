@@ -1,7 +1,9 @@
 ﻿using DAO.Interfaces;
 using Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,14 +18,45 @@ namespace DAO.Impl
             this._context = context;
         }
 
-        public Task<DataResponse<Narrador>> GetNarradores()
+        public async Task<DataResponse<Narrador>> GetNarradores()
         {
-            throw new NotImplementedException();
+            DataResponse<Narrador> response = new DataResponse<Narrador>();
+
+            try
+            {
+                response.Data = _context.Narradores.ToListAsync();
+                response.Sucesso = true;
+            }
+            catch (Exception ex)
+            {
+                response.Sucesso = false;
+                response.Erros.Add("Erro no banco de dados.");
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+            }
+
+            return response;
         }
 
-        public Task<Response> Insert(Narrador narrador)
+        public async Task<Response> Insert(Narrador narrador)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+
+            try
+            {
+
+                this._context.Narradores.Add(narrador);
+                await this._context.SaveChangesAsync();
+                response.Sucesso = true;
+
+            }
+            catch (Exception ex)
+            {
+                response.Erros.Add("Erro no banco de dados.");
+                response.Sucesso = false;
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+            }
+
+            return response;
         }
     }
 }
