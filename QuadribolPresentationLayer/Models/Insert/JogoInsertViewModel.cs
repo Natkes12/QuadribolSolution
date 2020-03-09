@@ -1,19 +1,17 @@
-﻿using System;
+﻿using Entity;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Entity
+namespace QuadribolPresentationLayer.Models.Insert
 {
-    public class Jogo
+    public class JogoInsertViewModel
     {
-        public int ID { get; set; }
-        public virtual Time Time1 { get; set; }
         public int Time1ID { get; set; }
-        public virtual Time Time2 { get; set; }
         public int Time2ID { get; set; }
         public DateTime DataJogo { get; set; }
         public int Pontuacao { get; set; }
-        public virtual Narrador Narrador { get; set; }
         public int NarradorID { get; set; }
     }
 }
