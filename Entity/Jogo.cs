@@ -15,5 +15,6 @@ namespace Entity
         public int Pontuacao { get; set; }
         public virtual Narrador Narrador { get; set; }
         public int NarradorID { get; set; }
+        public bool Encerrado { get; set; }
     }
 }

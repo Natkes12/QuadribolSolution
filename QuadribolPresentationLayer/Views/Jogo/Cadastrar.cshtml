@@ -38,8 +38,74 @@
         </div>
 
         <div class="form-group">
+            <label class="control-label col-md-2">Data do Jogo</label>
             <div class="col-md-10">
-                <input name="BotaoEnviar" id="BotaoEnviar" type="submit" value="Cadastrar" />
+                <input class="form-control" type="date" name="DataJogo" id="DataJogo" />
+                <span class="text-danger" id="erroDataJogo" name="erroDataJogo"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Narrador da Partida</label>
+            <div class="col-md-10">
+                <select class="form-control" name="Narrador" id="Narrador">
+                    @foreach (var item in ViewBag.Narradores)
+                    {
+                        <option value="@item.ID">@item.Nome</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input name="CadastrarJogo" id="CadastrarJogo" type="submit" value="Cadastrar Jogo" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Placar Time 1</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text" name="PontuacaoTime1" id="PontuacaoTime1" />
+                <span class="text-danger" id="erroPTime1" name="erroPTime"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input name="Goles1" id="Goles1" type="submit" value="Goles" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input name="PomoDeOur1o" id="PomoDeOuro1" type="submit" value="Pomo de Ouro" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Placar Time 2</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text" name="PontuacaoTime2" id="PontuacaoTime2" />
+                <span class="text-danger" id="erroPTime2" name="erroPTime2"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input name="Goles2" id="Goles2" type="submit" value="Goles" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input name="PomoDeOuro2" id="PomoDeOuro2" type="submit" value="Pomo de Ouro" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input name="EncerrarJogo" id="EncerrarJogo" type="submit" value="Encerrar o Jogo" />
             </div>
         </div>
 
@@ -56,21 +122,15 @@
             $("#BotaoEnviar").click(function (e) {
 
                 var time1 = $("#Time1").val();
+                var time2 = $("#Time2").val();
 
                 var sucesso = true;
 
-                if (nome == "") {
-                    $("#erroNome").html("O nome do usuário deve ser informado.");
+                if (time1 == time2) {
+                    $("#erroTime1").html("Os times que irão jogar devem ser diferentes!");
+                    $("#erroTime2").html("Os times que irão jogar devem ser diferentes!");
                     sucesso = false;
                 }
-                else if (nome.length < 5 || nome.length > 50) {
-                    $("#erroNome").html("O nome do usuário deve conter entre 2 e 50 caracteres.");
-                    sucesso = false;
-                }
-                else {
-                    $("#erroNome").html("");
-                }              
-
             });
 
         });
