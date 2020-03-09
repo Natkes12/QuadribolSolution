@@ -27,17 +27,7 @@ namespace BLL
             if (string.IsNullOrWhiteSpace(competidor.Nome))
             {
                 response.Erros.Add("O nome do competidor deve ser informado.");
-            }
-
-            if (string.IsNullOrWhiteSpace(competidor.Escolaridade))
-            {
-                response.Erros.Add("A escolaridade deve ser informada.");
-            }
-
-            if (competidor.Escolaridade.Length < 4)
-            {
-                response.Erros.Add("O competidor deve ter escolaridade de no mínimo 4.");
-            }
+            }          
 
             if (response.Erros.Count > 0)
             {
