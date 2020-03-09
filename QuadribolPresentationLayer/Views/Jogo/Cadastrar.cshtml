@@ -1,18 +1,27 @@
 ﻿
 @{
-    ViewBag.Title = "Cadastrar";
+    ViewData["Title"] = "Cadastrar";
 }
 
 <h1>Cadastrar</h1>
 
 <div class="form-horizontal">
 
+    @{
+
+     }
+    }
+
     <form method="post">
         <div class="form-group">
-            <label class="control-label col-md-2">Nome</label>
+            <label class="control-label col-md-2">Primeiro Time</label>
             <div class="col-md-10">
-                <input class="form-control" type="text" name="Nome" id="Nome" />
-                <span class="text-danger" id="erroNome" name="erroNome"></span>
+                <select class="form-control" name="Casa" id="Casa">
+                    @foreach (var item in ViewBag.Times)
+                    {
+                        <option value="@item.ID">@item.Nome</option>
+                    }
+                </select>
             </div>
         </div>
 

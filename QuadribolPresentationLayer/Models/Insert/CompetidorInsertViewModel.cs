@@ -12,7 +12,5 @@ namespace QuadribolPresentationLayer.Models.Insert
         public Casa Casa { get; set; }
         public string Escolaridade { get; set; }
         public Funcao Funcao { get; set; }
-        public bool Disponivel { get; set; }
-        public bool EhAtivo { get; set; }
     }
 }
