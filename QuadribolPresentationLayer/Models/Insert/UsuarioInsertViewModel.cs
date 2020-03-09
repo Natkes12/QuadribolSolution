@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace QuadribolPresentationLayer.Models.Insert
 {
-    public class CompetidorInsertViewModel
+    public class UsuarioInsertViewModel
     {
         public string Nome { get; set; }
-        public Casa Casa { get; set; }
-        public string Escolaridade { get; set; }
-        public Funcao Funcao { get; set; }
-        public bool Disponivel { get; set; }
+        public string Email { get; set; }
+        public string Senha { get; set; }
+        public Permissao Permissao { get; set; }
         public bool EhAtivo { get; set; }
     }
 }
