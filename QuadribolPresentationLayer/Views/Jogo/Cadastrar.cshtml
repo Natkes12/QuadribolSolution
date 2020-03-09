@@ -16,7 +16,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Primeiro Time</label>
             <div class="col-md-10">
-                <select class="form-control" name="Casa" id="Casa">
+                <select class="form-control" name="Time1" id="Time1">
                     @foreach (var item in ViewBag.Times)
                     {
                         <option value="@item.ID">@item.Nome</option>
@@ -25,41 +25,13 @@
             </div>
         </div>
 
-        @{
-            string[] casa = Enum.GetNames(typeof(Entity.Enums.Casa));
-        }
-
         <div class="form-group">
-            <label class="control-label col-md-2">Casa</label>
+            <label class="control-label col-md-2">Segundo Time</label>
             <div class="col-md-10">
-                <select class="form-control" name="Casa" id="Casa">
-                    @for (int i = 0; i < casa.Length; i++)
+                <select class="form-control" name="Time2" id="Time2">
+                    @foreach (var item in ViewBag.Times)
                     {
-                        <option value="@i">@casa[i]</option>
-                    }
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Escolaridade</label>
-            <div class="col-md-10">
-                <input class="form-control" type="text" name="Escolaridade" id="Escolaridade" />
-                <span class="text-danger" id="erroEscolaridade" name="erroEscolaridade"></span>
-            </div>
-        </div>
-
-        @{
-            string[] funcao = Enum.GetNames(typeof(Entity.Enums.Funcao));
-        }
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Função</label>
-            <div class="col-md-10">
-                <select class="form-control" name="Funcao" id="Funcao">
-                    @for (int i = 0; i < funcao.Length; i++)
-                    {
-                        <option value="@i">@funcao[i]</option>
+                        <option value="@item.ID">@item.Nome</option>
                     }
                 </select>
             </div>
@@ -74,3 +46,34 @@
     </form>
 
 </div>
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#BotaoEnviar").click(function (e) {
+
+                var time1 = $("#Time1").val();
+
+                var sucesso = true;
+
+                if (nome == "") {
+                    $("#erroNome").html("O nome do usuário deve ser informado.");
+                    sucesso = false;
+                }
+                else if (nome.length < 5 || nome.length > 50) {
+                    $("#erroNome").html("O nome do usuário deve conter entre 2 e 50 caracteres.");
+                    sucesso = false;
+                }
+                else {
+                    $("#erroNome").html("");
+                }              
+
+            });
+
+        });
+    </script>
+
+}
