@@ -32,11 +32,19 @@
             </div>
         </div>
 
+        @{ 
+            string[] escolaridade = Enum.GetNames(typeof(Entity.Enums.Escolaridade));
+        }
+
         <div class="form-group">
             <label class="control-label col-md-2">Escolaridade</label>
             <div class="col-md-10">
-                <input class="form-control" type="text" name="Escolaridade" id="Escolaridade" />
-                <span class="text-danger" id="erroEscolaridade" name="erroEscolaridade"></span>
+                <select class="form-control" name="Escolaridade" id="Escolaridade">
+                    @for (int i = 0; i < escolaridade.Length; i++)
+                    {
+                        <option value="@i">@escolaridade[i]</option>
+                    }
+                </select>
             </div>
         </div>
 
