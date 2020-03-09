@@ -27,7 +27,7 @@ namespace BLL
             if (string.IsNullOrWhiteSpace(competidor.Nome))
             {
                 response.Erros.Add("O nome do competidor deve ser informado.");
-            }          
+            }
 
             if (response.Erros.Count > 0)
             {
