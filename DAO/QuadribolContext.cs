@@ -1,6 +1,8 @@
-﻿using Entity;
+﻿using DAO.Mappings;
+using Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Reflection;
 
 namespace DAO
 {
@@ -17,5 +19,12 @@ namespace DAO
         public DbSet<Narrador> Narradores { get; set; }
         public DbSet<Jogo> Jogos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
