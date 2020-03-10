@@ -8,7 +8,7 @@ namespace Entity
     {
         public int ID { get; set; }
         public virtual ICollection<Time> Times { get; set; }
-        public int TimeID { get; set; }
+        public int[] TimesID { get; set; }
         public DateTime DataJogo { get; set; }
         public int Pontuacao { get; set; }
         public virtual Narrador Narrador { get; set; }
@@ -18,6 +18,7 @@ namespace Entity
         public Jogo()
         {
             this.Times = new Time[2];
+            this.TimesID = new int[2];
         }
     }
 }
