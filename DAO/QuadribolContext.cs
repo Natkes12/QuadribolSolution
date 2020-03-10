@@ -24,6 +24,9 @@ namespace DAO
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
+            modelBuilder.Entity<Jogo>().HasOne(j => j.Time1).WithMany(c => c.Jogos);
+            modelBuilder.Entity<Jogo>().HasOne(j => j.Narrador).WithMany(c => c.Jogos);
+
             base.OnModelCreating(modelBuilder);
         }
     }

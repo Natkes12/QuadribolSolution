@@ -48,7 +48,7 @@ namespace QuadribolPresentationLayer.Controllers
             try
             {
                 await this._usuarioService.Insert(usuario);
-                return RedirectToAction("Usuario", "Index");
+                return RedirectToAction("Index", "Usuario");
             }
             catch (Exception ex)
             {

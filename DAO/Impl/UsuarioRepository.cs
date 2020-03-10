@@ -10,7 +10,7 @@ namespace DAO
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private readonly QuadribolContext _context;
+        private QuadribolContext _context;
 
         public UsuarioRepository(QuadribolContext context)
         {
