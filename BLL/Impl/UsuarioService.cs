@@ -49,9 +49,9 @@ namespace BLL.Impl
             {
                 usuario.Email = usuario.Email.Trim();
                 usuario.Email = Regex.Replace(usuario.Email, @"\s+", " ");
-                if (usuario.Email.Length < 5 || usuario.Email.Length > 50)
+                if (usuario.Email.Length < 10 || usuario.Email.Length > 50)
                 {
-                    response.Erros.Add("O email do cliente deve conter entre 5 e 50 caracteres");
+                    response.Erros.Add("O email do cliente deve conter entre 10 e 50 caracteres");
                 }
             }
 

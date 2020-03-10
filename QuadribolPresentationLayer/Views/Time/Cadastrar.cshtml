@@ -3,5 +3,69 @@
     ViewData["Title"] = "Cadastrar";
 }
 
-<h1>Cadastrar</h1>
+<h1>Cadastrar </h1>
 
+<div class="form-horizontal">
+
+    <form method="post">
+
+        @{
+            for (int i = 0; i < 7; i++)
+            {
+                <div class="form-group">
+                    <label class="control-label col-md-2">Competidor @i+1</label>
+                    <div class="col-md-10">
+                        <select class="form-control" name="Competidor" id="Competidor">
+                            @foreach (var item in ViewBag.Competidores)
+                            {
+                                <option value="@item.ID">@item.Nome</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            }
+        }
+
+        @{
+            string[] casa = Enum.GetNames(typeof(Entity.Enums.Casa));
+        }
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Casa do Time</label>
+            <div class="col-md-10">
+                <select class="form-control" name="Casa" id="Casa">
+                    @for (int i = 0; i < casa.Length; i++)
+                    {
+                        <option value="@i">@casa[i]</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </form>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input name="CadastarTime" id="CadastarTime" type="submit" value="Cadastrar Time" />
+        </div>
+    </div>
+
+    @section scripts{
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $("#CadastrarTime").click(function (e) {
+
+                    var sucesso = true;
+
+                    if (!sucesso) {
+                        e.preventDefault();
+                    }
+
+                });
+
+            });
+        </script>
+
+    }

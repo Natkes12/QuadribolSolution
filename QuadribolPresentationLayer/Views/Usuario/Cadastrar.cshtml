@@ -3,5 +3,148 @@
     ViewData["Title"] = "Cadastrar";
 }
 
-<h1>Cadastrar</h1>
+<h1>Cadastrar Usuário</h1>
 
+<div class="form-horizontal">
+
+    <form method="post">
+        <div class="form-group">
+            <label class="control-label col-md-2">Nome</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text" name="Nome" id="Nome" />
+                <span class="text-danger" id="erroNome" name="erroNome"></span>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Email</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text" name="Email" id="Email" />
+                <span class="text-danger" id="erroEmail" name="erroEmail"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Senha</label>
+            <div class="col-md-10">
+                <input class="form-control" type="password" name="Senha" id="Senha" />
+                <span class="text-danger" id="erroSenha" name="erroSenha"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Confirmar Senha</label>
+            <div class="col-md-10">
+                <input class="form-control" type="password" name="ConfirmarSenha" id="ConfirmarSenha" />
+                <span class="text-danger" id="erroConfirmarSenha" name="erroConfirmarSenha"></span>
+            </div>
+        </div>
+
+        @{
+            string[] permissao = Enum.GetNames(typeof(Entity.Enums.Permissao));
+        }
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Permissão</label>
+            <div class="col-md-10">
+                <select class="form-control" name="Permissao" id="Permissao">
+                    @for (int i = 0; i < permissao.Length; i++)
+                    {
+                        <option value="@i">@permissao[i]</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Ativo</label>
+            <div class="col-md-10">
+                <input class="checkbox" value="true" type="checkbox" name="Ativo" id="Ativo" />
+                <input value="false" type="hidden" name="Ativo" id="Ativo" />
+            </div>
+        </div>
+    </form>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input name="BotaoEnviar" id="BotaoEnviar" type="submit" value="Cadastrar" />
+        </div>
+    </div>
+
+    @section scripts{
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $("#BotaoEnviar").click(function (e) {
+
+                    var nome = $("#Nome").val();
+                    var email = $("#Email").val();
+                    var senha = $("#Senha").val();
+                    var confirmarSenha = $("#ConfirmarSenha").val();
+
+                    var sucesso = true;
+
+                    if (nome == "") {
+                        $("#erroNome").html("O nome do Usuário deve ser informado.");
+                        sucesso = false;
+                    }
+                    else if (nome.length < 2 || nome.length > 50) {
+                        $("#erroNome").html("O nome do Usuário deve conter entre 2 e 50 caracteres.");
+                        sucesso = false;
+                    }
+                    else {
+                        $("#erroNome").html("");
+                    }
+
+                    if (email == "") {
+                        $("#erroEmail").html("O Email deve ser informado.");
+                        sucesso = false;
+                    }
+                    else if (!validateEmail(email)) {
+                        $("#erroEmail").html("Email inválido!");
+                        sucesso = false;
+                    }
+                    else if (email.length < 10 || email.length > 50) {
+                        $("#erroEmail").html("O email do usuário deve conter entre 10 e 50 caracteres.");
+                        sucesso = false;
+                    }
+                    else {
+                        $("#erroEmail").html("");
+                    }
+
+                    if (senha == "") {
+                        $("#erroSenha").html("A senha do Usuário deve ser informada.");
+                        sucesso = false;
+                    }
+                    else if (senha.length < 2 || senha.length > 15) {
+                        $("#erroSenha").html("A senha do Usuário deve conter entre 2 e 15 caracteres.");
+                        sucesso = false;
+                    }
+                    else {
+                        $("#erroConfirmarSenha").html("");
+                    }
+
+                    if (confirmarSenha == "") {
+                        $("#erroConfirmarSenha").html("A senha do Usuário deve ser informada.");
+                        sucesso = false;
+                    }
+                    else if (confirmarSenha != senha) {
+                        $("#erroConfirmarSenha").html("As senhas são diferentes!");
+                        sucesso = false;
+                    }
+                    else {
+                        $("#erroConfirmarSenha").html("");
+                    }
+
+                    if (!sucesso) {
+                        e.preventDefault();
+                    }
+                });
+
+            });
+        </script>
+
+    }

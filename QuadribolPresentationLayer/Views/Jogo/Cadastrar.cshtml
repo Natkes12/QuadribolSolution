@@ -80,7 +80,7 @@
 
         <div class="form-group">
             <div class="col-md-10">
-                <input name="PomoDeOur1o" id="PomoDeOuro1" type="submit" value="Pomo de Ouro" />
+                <input name="PomoDeOuro1" id="PomoDeOuro1" type="submit" value="Pomo de Ouro" />
             </div>
         </div>
 
@@ -120,7 +120,7 @@
 
         $(document).ready(function () {
 
-            $("#BotaoEnviar").click(function (e) {
+            $("#CadastrarJogo").click(function (e) {
 
                 var time1 = $("#Time1").val();
                 var time2 = $("#Time2").val();
@@ -131,6 +131,11 @@
                     $("#erroTime1").html("Os times que irão jogar devem ser diferentes!");
                     $("#erroTime2").html("Os times que irão jogar devem ser diferentes!");
                     sucesso = false;
+
+                }
+
+                 if (!sucesso) {
+                    e.preventDefault();
                 }
             });
 

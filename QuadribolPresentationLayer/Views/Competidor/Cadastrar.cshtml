@@ -3,7 +3,7 @@
     ViewBag.Title = "Cadastrar";
 }
 
-<h1>Cadastrar</h1>
+<h1>Cadastrar Competidor</h1>
 
 <div class="form-horizontal">
 
@@ -96,7 +96,9 @@
                 else {
                     $("#erroNome").html("");
                 }              
-
+                 if (!sucesso) {
+                    e.preventDefault();
+                }
             });
 
         });

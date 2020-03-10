@@ -24,6 +24,12 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <div class="col-md-10">
+                <input name="CadastrarNarrador" id="CadastrarNarrador" type="submit" value="Cadastrar Narrador" />
+            </div>
+        </div>
+
     </form>
 </div>
 
@@ -51,6 +57,9 @@
                     $("#erroNome").html("");
                 }
 
+                 if (!sucesso) {
+                    e.preventDefault();
+                }
             });
 
         });
