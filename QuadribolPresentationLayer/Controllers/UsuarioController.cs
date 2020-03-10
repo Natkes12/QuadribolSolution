@@ -25,6 +25,11 @@ namespace QuadribolPresentationLayer.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> Cadastrar()
         {
             return View();
