@@ -17,14 +17,14 @@ namespace QuadribolPresentationLayer.Controllers
     {
 
         private IJogoService _jogoService;
-        private TimeService timeService;
-        private NarradorService narradorService;
+        private ITimeRepository _timeRepository;
+        private INarradorRepository _narradorRepository;
 
         public JogoController(IJogoService jogo, ITimeRepository time, INarradorRepository narrador)
         {
             this._jogoService = jogo;
-            this.timeService = new TimeService(time);
-            this.narradorService = new NarradorService(narrador);
+            this._timeRepository = time;
+            this._narradorRepository = narrador;
         }
 
 
@@ -35,8 +35,8 @@ namespace QuadribolPresentationLayer.Controllers
 
         public async Task<IActionResult> Cadastrar()
         {
-            DataResponse<Time> times = await timeService.GetTimes();
-            DataResponse<Narrador> narradores = await narradorService.GetNarrador();
+            DataResponse<Time> times = await _timeRepository.GetTimes();
+            DataResponse<Narrador> narradores = await _narradorRepository.GetNarradores();
 
             var configuration = new MapperConfiguration(cfg =>
             {
@@ -56,6 +56,23 @@ namespace QuadribolPresentationLayer.Controllers
         [HttpPost]
         public async Task<IActionResult> Cadastrar(JogoInsertViewModel viewModel)
         {
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<JogoInsertViewModel, Jogo>();
+            });
+            IMapper mapper = configuration.CreateMapper();
+            Jogo jogo = mapper.Map<Jogo>(viewModel);
+
+            try
+            {
+                await this._jogoService.Insert(jogo);
+                return RedirectToAction("Index", "Jogo");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Errors = ex.Message;
+            }
+
             return View();
         }
     }

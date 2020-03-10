@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BLL.Interfaces;
+using Entity;
 using Microsoft.AspNetCore.Mvc;
 using QuadribolPresentationLayer.Models.Insert;
 
@@ -31,6 +33,23 @@ namespace QuadribolPresentationLayer.Controllers
         [HttpPost]
         public async Task<IActionResult> Cadastrar(UsuarioInsertViewModel viewModel)
         {
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<UsuarioInsertViewModel, Usuario>();
+            });
+            IMapper mapper = configuration.CreateMapper();
+            Usuario usuario = mapper.Map<Usuario>(viewModel);
+
+            try
+            {
+                await this._usuarioService.Insert(usuario);
+                return RedirectToAction("Usuario", "Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Errors = ex.Message;
+            }
+
             return View();
         }
     }
