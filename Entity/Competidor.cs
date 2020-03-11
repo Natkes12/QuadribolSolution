@@ -1,11 +1,16 @@
 ﻿using Entity.Enums;
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity
 {
+    [Table("COMPETIDORES")]
     public class Competidor
     {
         public int ID { get; set; }
+        [Required]
+        [Column(TypeName = "VARCHAR(50)")]
         public string Nome { get; set; }
         public Casa Casa { get; set; }
         public Escolaridade Escolaridade { get; set; }
