@@ -31,7 +31,7 @@ namespace QuadribolPresentationLayer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<QuadribolContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("QuadribolDbConnection")));
+                options => options.UseSqlServer(Configuration["QuadribolDbConnection"]));
 
             services.AddControllersWithViews();
             services.AddTransient<ICompetidorRepository, CompetidorRepository>();

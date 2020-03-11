@@ -12,11 +12,11 @@ namespace Entity
         public int ID { get; set; }
         public List<Competidor> Competidor { get; set; }
         public Casa Casa { get; set; }
-        public virtual ICollection<Jogo> Jogos { get; set; }
+        public virtual ICollection<JogoTime> Jogos { get; set; }
 
         public Time()
         {
-            this.Jogos = new List<Jogo>();
+            this.Jogos = new List<JogoTime>();
         }
     }
 }
