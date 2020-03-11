@@ -1,0 +1,45 @@
+﻿@model List<QuadribolPresentationLayer.Models.Query.UsuarioQueryViewModel>
+@{
+    ViewBag.Title = "";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Senha</th>
+        <th>Email</th>
+        <th>Ativo</th>
+    </tr>
+
+    @{
+        string EhAtivo = "";
+    }
+
+    @foreach (var item in Model)
+    {
+
+        @if (item.EhAtivo)
+        {
+            EhAtivo = "Sim";
+        }
+        else
+        {
+            EhAtivo = "Não";
+        }
+
+<tr>
+    <td>@item.ID</td>
+    <td>@item.Nome</td>
+    <td>@item.Email</td>
+    <td>@item.Senha</td>
+    <td>@item.Permissao.ToString()</td>
+    <td>@EhAtivo</td>
+</tr>
+    }
+
+</table>
+

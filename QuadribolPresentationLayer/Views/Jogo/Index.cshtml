@@ -1,0 +1,27 @@
+﻿@model List<QuadribolPresentationLayer.Models.Query.JogoQueryViewModel>
+
+@{
+    ViewBag.Title = "";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>Data do Jogo</th>
+        <th>Pontuação</th>
+        <th>Narrador</th>
+        <th>Data de Nascimento</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@item.Jogo.DataJogo</td>
+    <td>@item.Jogo.Pontuacao</td>
+    <td>@item.Jogo.Narrador.Nome</td>
+    <td>@item.Time.Casa</td>
+</tr>
+    }
+
+</table>

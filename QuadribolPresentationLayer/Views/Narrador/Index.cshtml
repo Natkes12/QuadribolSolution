@@ -1,0 +1,36 @@
+﻿@model List<QuadribolPresentationLayer.Models.Query.NarradorQueryViewModel>
+@{
+    ViewBag.Title = "";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>Nome</th>
+        <th>Ativo</th>
+    </tr>
+
+    @{ 
+        string EhAtivo = "";
+    }
+
+    @foreach (var item in Model)
+    {
+
+        @if (item.EhAtivo)
+         {
+            EhAtivo = "Sim";
+         }
+         else
+         {
+            EhAtivo = "Não";
+         }
+
+        <tr>
+            <td>@item.Nome</td>
+            <td>@EhAtivo</td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,28 @@
+﻿@model List<QuadribolPresentationLayer.Models.Query.TimeQueryViewModel>
+
+@{
+    ViewBag.Title = "";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>Data do Jogo</th>
+        <th>Pontuação</th>
+    </tr>
+
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                @foreach (var item2 in item.Competidor)
+                {
+                    <td>@item2.Nome</td>
+                }
+                <td>@item.Casa</td>
+            </tr>
+        }
+    }
+
+</table>
