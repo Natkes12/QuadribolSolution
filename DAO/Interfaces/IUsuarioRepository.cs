@@ -10,5 +10,6 @@ namespace DAO.Interfaces
     {
         Task<Response> Insert(Usuario usuario);
         Task<Usuario> Autenticar(string email, string senha);
+        Task<Usuario> GetUsuario(int id);
     }
 }

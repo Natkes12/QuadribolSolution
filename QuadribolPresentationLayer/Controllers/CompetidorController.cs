@@ -12,11 +12,16 @@ namespace QuadribolPresentationLayer.Controllers
 {
     public class CompetidorController : Controller
     {
-        private ICompetidorService _competidorService;
 
-        public CompetidorController(ICompetidorService competidor)
+        
+
+        private ICompetidorService _competidorService;
+        private IUsuarioService _usuarioService;
+
+        public CompetidorController(ICompetidorService competidor, IUsuarioService usuario)
         {
             this._competidorService = competidor;
+            this._usuarioService = usuario;
         }
 
         public async Task<IActionResult> Index()
@@ -26,6 +31,14 @@ namespace QuadribolPresentationLayer.Controllers
 
         public async Task<IActionResult> Cadastrar()
         {
+            int usuarioId = Convert.ToInt32(Request.Cookies["USERIDENTITY"].ToString());
+            var usuario = _usuarioService.GetUsuario(usuarioId);
+
+            if (usuario.Result.Permissao != Entity.Enums.Permissao.Administrador)
+            {
+                return RedirectToAction("Index", "Jogo");
+            }
+
             return View();
         }
 

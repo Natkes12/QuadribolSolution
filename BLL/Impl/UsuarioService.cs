@@ -19,6 +19,48 @@ namespace BLL.Impl
             this._usuarioRepository = usuarioRepository;
         }
 
+        public async Task<Usuario> Autenticar(string email, string senha)
+        {
+            Response response = new Response();
+            Usuario usuario = new Usuario();
+
+            try
+            {
+                usuario = await _usuarioRepository.Autenticar(email, senha);
+
+                if (usuario == null)
+                {
+                    throw new Exception("Email e/ou senha inválidos");
+                }
+
+                response.Sucesso = true;
+            }
+            catch (Exception ex)
+            {
+                response.Erros.Add("Erro no banco de dados, contate o administrador.");
+                response.Sucesso = false;
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+                throw new Exception("Erro no banco de dados, contate o administrador.");
+                
+            }
+
+            return usuario;
+
+        }
+
+        public async Task<Usuario> GetUsuario(int id)
+        {
+            try
+            {
+                return await _usuarioRepository.GetUsuario(id);
+            }
+            catch (Exception ex)
+            {
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+                throw new Exception("Erro no banco de dados, contate o administrador.");
+            }
+        }
+
         public async Task<Response> Insert(Usuario usuario)
         {
             Response response = new Response();

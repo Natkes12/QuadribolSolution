@@ -27,6 +27,16 @@ namespace DAO
             return user;
         }
 
+        public async Task<Usuario> GetUsuario(int id)
+        {
+            Usuario user = await _context.Usuarios.FirstOrDefaultAsync(u => u.ID == id);
+            if (user == null)
+            {
+                throw new Exception("Usuário não encontrado.");
+            }
+            return user;
+        }
+
         public async Task<Response> Insert(Usuario usuario)
         {
             Response response = new Response();

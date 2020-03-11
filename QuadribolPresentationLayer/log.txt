@@ -1,0 +1,2 @@
+Email e/ou senha inválidos -    at DAO.UsuarioRepository.Autenticar(String email, String senha) in C:\Users\900199\source\repos\QuadribolSolution\DAO\Impl\UsuarioRepository.cs:line 27
+   at BLL.Impl.UsuarioService.Autenticar(String email, String senha) in C:\Users\900199\source\repos\QuadribolSolution\BLL\Impl\UsuarioService.cs:line 29

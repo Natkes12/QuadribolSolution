@@ -30,6 +30,30 @@ namespace QuadribolPresentationLayer.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Login(string email, string senha)
+        {
+            try
+            {
+                Usuario usuario = await _usuarioService.Autenticar(email, senha);
+                Response.Cookies.Append("USERIDENTITY", usuario.ID.ToString());
+                var X = Request.Cookies["USERIDENTITY"].ToString();
+                if (usuario.Permissao == Entity.Enums.Permissao.Administrador)
+                {
+                    return RedirectToAction("Cadastro", "Jogo");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Jogo");
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Erros = ex.Message;
+            }
+            return View();
+        }
+
         public async Task<IActionResult> Cadastrar()
         {
             return View();
@@ -48,7 +72,7 @@ namespace QuadribolPresentationLayer.Controllers
             try
             {
                 await this._usuarioService.Insert(usuario);
-                return RedirectToAction("Index", "Usuario");
+                return RedirectToAction("Login", "Usuario");
             }
             catch (Exception ex)
             {
