@@ -3,6 +3,7 @@ using Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,6 +36,25 @@ namespace DAO
                 throw new Exception("Usuário não encontrado.");
             }
             return user;
+        }
+
+        public async Task<DataResponse<Usuario>> GetUsuarios()
+        {
+            DataResponse<Usuario> response = new DataResponse<Usuario>();
+
+            try
+            {
+                response.Data = _context.Usuarios.ToListAsync();
+                response.Sucesso = true;
+            }
+            catch (Exception ex)
+            {
+                response.Sucesso = false;
+                response.Erros.Add("Erro no banco de dados.");
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+            }
+
+            return response;
         }
 
         public async Task<Response> Insert(Usuario usuario)

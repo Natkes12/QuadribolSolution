@@ -28,9 +28,27 @@ namespace QuadribolPresentationLayer.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            try
+            {
+                DataResponse<Jogo> jogos = await _jogoService.GetJogos();
+
+                var configuration = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Jogo, JogoQueryViewModel>();
+                });
+
+                IMapper mapper = configuration.CreateMapper();
+
+                List<JogoQueryViewModel> dados = mapper.Map<List<JogoQueryViewModel>>(jogos.Data);
+
+                return View(dados);
+            }
+            catch (Exception)
+            {
+                return View();
+            }
         }
 
         public async Task<IActionResult> Cadastrar()

@@ -7,6 +7,7 @@ using BLL.Interfaces;
 using Entity;
 using Microsoft.AspNetCore.Mvc;
 using QuadribolPresentationLayer.Models.Insert;
+using QuadribolPresentationLayer.Models.Query;
 
 namespace QuadribolPresentationLayer.Controllers
 {
@@ -20,9 +21,35 @@ namespace QuadribolPresentationLayer.Controllers
             this._usuarioService = usuario;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            int usuarioId = Convert.ToInt32(Request.Cookies["USERIDENTITY"].ToString());
+            var usuario = _usuarioService.GetUsuario(usuarioId);
+
+            if (usuario.Result.Permissao != Entity.Enums.Permissao.Administrador)
+            {
+                return RedirectToAction("Index", "Jogo");
+            }
+
+            try
+            {
+                DataResponse<Usuario> usuarios = await _usuarioService.GetUsuarios();
+
+                var configuration = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Usuario, UsuarioQueryViewModel>();
+                });
+
+                IMapper mapper = configuration.CreateMapper();
+
+                List<UsuarioQueryViewModel> dados = mapper.Map<List<UsuarioQueryViewModel>>(usuarios.Data);
+
+                return View(dados);
+            }
+            catch (Exception)
+            {
+                return View();
+            }
         }
 
         public async Task<IActionResult> Login()
