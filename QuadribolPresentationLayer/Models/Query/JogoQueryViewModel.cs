@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace QuadribolPresentationLayer.Models.Query
 {
-    public class AutenticarQueryViewModel
+    public class JogoQueryViewModel
     {
     }
 }

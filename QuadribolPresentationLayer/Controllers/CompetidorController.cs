@@ -55,7 +55,7 @@ namespace QuadribolPresentationLayer.Controllers
             try
             {
                 await this._competidorService.Insert(competidor);
-                return RedirectToAction("Index", "Competidor");
+                return RedirectToAction("Cadastrar", "Time");
             }
             catch(Exception ex)
             {
