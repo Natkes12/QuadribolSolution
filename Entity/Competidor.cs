@@ -1,5 +1,6 @@
 ﻿using Entity.Enums;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,6 +18,13 @@ namespace Entity
         public Funcao Funcao { get; set; }
         public bool Disponivel { get; set; }
         public bool EhAtivo { get; set; }
+        public virtual ICollection<TimeCompetidor> Times { get; set; }
+
+        public Competidor()
+        {
+            this.Times = new List<TimeCompetidor>();
+        }
+
     }
 
 }

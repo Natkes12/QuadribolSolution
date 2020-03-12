@@ -1,4 +1,5 @@
 ﻿@model List<QuadribolPresentationLayer.Models.Query.UsuarioQueryViewModel>
+
 @{
     ViewBag.Title = "";
 }
@@ -11,7 +12,7 @@
         <th>Nome</th>
         <th>Email</th>
         <th>Senha</th>
-        <th>Email</th>
+        <th>Permissão</th>
         <th>Ativo</th>
     </tr>
 
@@ -31,14 +32,14 @@
             EhAtivo = "Não";
         }
 
-<tr>
-    <td>@item.ID</td>
-    <td>@item.Nome</td>
-    <td>@item.Email</td>
-    <td>@item.Senha</td>
-    <td>@item.Permissao.ToString()</td>
-    <td>@EhAtivo</td>
-</tr>
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.Nome</td>
+            <td>@item.Email</td>
+            <td>@item.Senha</td>
+            <td>@item.Permissao.ToString()</td>
+            <td>@EhAtivo</td>
+        </tr>
     }
 
 </table>

@@ -10,37 +10,153 @@
     <form method="post">
 
         @{
-            for (int i = 0; i < 7; i++)
-            {
-                <div class="form-group">
-                    <label class="control-label col-md-2">Competidor @i+1</label>
-                    <div class="col-md-10">
-                        <select class="form-control" name="Competidor" id="Competidor">
-                            @foreach (var item in ViewBag.Competidores)
-                            {
-                                <option value="@item.ID">@item.Nome</option>
-                            }
-                        </select>
-                    </div>
-                </div>
-            }
-        }
-
-        @{
-            string[] casa = Enum.GetNames(typeof(Entity.Enums.Casa));
+            Entity.Enums.Casa casa = ViewBag.Casa;
         }
 
         <div class="form-group">
             <label class="control-label col-md-2">Casa do Time</label>
             <div class="col-md-10">
-                <select class="form-control" name="Casa" id="Casa">
-                    @for (int i = 0; i < casa.Length; i++)
+                <input name="Casa" id="Casa" type="text" value="@ViewBag.Casa" readonly />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Artilheiro 1</label>
+            <div class="col-md-10">
+                <select class="form-control" name="Artilheiro1" id="Artilheiro1">
+                    @foreach (var item in ViewBag.Competidores)
                     {
-                        <option value="@i">@casa[i]</option>
+                        if (item.Casa == casa)
+                        {
+                            if (item.Funcao == Entity.Enums.Funcao.Artilheiro)
+                            {
+                                <option value="@item.ID">@item.Nome</option>
+                            }
+                        }
                     }
                 </select>
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Artilheiro 2</label>
+            <div class="col-md-10">
+                <select class="form-control" name="Artilheiro2" id="Artilheiro2">
+                    @foreach (var item in ViewBag.Competidores)
+                    {
+                        if (item.Casa == casa)
+                        {
+                            if (item.Funcao == Entity.Enums.Funcao.Artilheiro)
+                            {
+                                <option value="@item.ID">@item.Nome</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Artilheiro 3</label>
+            <div class="col-md-10">
+                <select class="form-control" name="Artilheiro3" id="Artilheiro3">
+                    @foreach (var item in ViewBag.Competidores)
+                    {
+                        if (item.Casa == casa)
+                        {
+                            if (item.Funcao == Entity.Enums.Funcao.Artilheiro)
+                            {
+                                <option value="@item.ID">@item.Nome</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        }
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Batedor 1</label>
+            <div class="col-md-10">
+                <select class="form-control" name="Batedor1" id="Batedor1">
+                    @foreach (var item in ViewBag.Competidores)
+                    {
+                        if (item.Casa == casa)
+                        {
+                            if (item.Funcao == Entity.Enums.Funcao.Batedor)
+                            {
+                                <option value="@item.ID">@item.Nome</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Batedor 2</label>
+            <div class="col-md-10">
+                <select class="form-control" name="Batedor2" id="Batedor2">
+                    @foreach (var item in ViewBag.Competidores)
+                    {
+                        if (item.Casa == casa)
+                        {
+                            if (item.Funcao == Entity.Enums.Funcao.Batedor)
+                            {
+                                <option value="@item.ID">@item.Nome</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        }
+
+        @{
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Apanhador</label>
+                <div class="col-md-10">
+                    <select class="form-control" name="Apanhador" id="Apanhador">
+                        @foreach (var item in ViewBag.Competidores)
+                        {
+                            if (item.Casa == casa)
+                            {
+                                if (item.Funcao == Entity.Enums.Funcao.Apanhador)
+                                {
+                                    <option value="@item.ID">@item.Nome</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+        }
+
+        @{
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Goleiro</label>
+                <div class="col-md-10">
+                    <select class="form-control" name="Goleiro" id="Goleiro">
+                        @foreach (var item in ViewBag.Competidores)
+                        {
+                            if (item.Casa == casa)
+                            {
+                                if (item.Funcao == Entity.Enums.Funcao.Goleiro)
+                                {
+                                    <option value="@item.ID">@item.Nome</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+        }
 
         <div class="form-group">
             <div class="col-md-10">
@@ -48,7 +164,7 @@
             </div>
         </div>
     </form>
-
+</div>
 
 
     @section scripts{

@@ -31,10 +31,19 @@ namespace QuadribolPresentationLayer.Controllers
 
         public async Task<IActionResult> Cadastrar()
         {
-            int usuarioId = Convert.ToInt32(Request.Cookies["USERIDENTITY"].ToString());
-            var usuario = _usuarioService.GetUsuario(usuarioId);
+            Usuario usuario = new Usuario();
 
-            if (usuario.Result.Permissao != Entity.Enums.Permissao.Administrador)
+            try
+            {
+                int usuarioId = Convert.ToInt32(Request.Cookies["USERIDENTITY"].ToString());
+                usuario = await _usuarioService.GetUsuario(usuarioId);
+            }
+            catch (NullReferenceException)
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
+
+            if (usuario.Permissao != Entity.Enums.Permissao.Administrador)
             {
                 return RedirectToAction("Index", "Jogo");
             }

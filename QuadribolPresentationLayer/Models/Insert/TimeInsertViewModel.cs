@@ -9,7 +9,7 @@ namespace QuadribolPresentationLayer.Models.Insert
 {
     public class TimeInsertViewModel
     {
-        public List<Competidor> Competidor { get; set; }
-        public Casa Casa { get; set; }
+        public virtual Time Time { get; set; }
+        public virtual Competidor Competidor { get; set; }
     }
 }

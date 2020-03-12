@@ -8,20 +8,23 @@
 
 <table class="table">
     <tr>
-        <th>Data do Jogo</th>
-        <th>Pontuação</th>
+        <th>Artilheiros</th>
+        <th>Apanhadores</th>
+        <th>Goleiros</th>
+        <th>Batedores</th>
+        <th>Casa do Time</th>
     </tr>
 
     @{
         foreach (var item in Model)
         {
-            <tr>
-                @foreach (var item2 in item.Competidor)
-                {
-                    <td>@item2.Nome</td>
-                }
-                <td>@item.Casa</td>
-            </tr>
+        <tr>
+            <td>@item.Artilheiro1.Nome, @item.Artilheiro2.Nome, @item.Artilheiro3.Nome</td>
+            <td>@item.Apanhador.Nome</td>
+            <td>@item.Goleiro.Nome</td>
+            <td>@item.Batedor1.Nome, @item.Batedor2.Nome</td>
+            <td>@item.Casa</td>
+        </tr>
         }
     }
 

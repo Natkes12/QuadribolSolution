@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "FiltrarCasa";
+}
+
+<h1>FiltrarCasa</h1>
+
+<div class="form-horizontal">
+
+    <form method="post">
+
+        @{
+            string[] casa = Enum.GetNames(typeof(Entity.Enums.Casa));
+        }
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Casa do Time</label>
+            <div class="col-md-10">
+                <select class="form-control" name="Casa" id="Casa">
+                    @for (int i = 0; i < casa.Length; i++)
+                    {
+                        <option value="@i">@casa[i]</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input name="CadastrarTime" id="CadastrarTime" type="submit" value="Avançar" />
+            </div>
+        </div>
+
+    </form>
+
+</div>

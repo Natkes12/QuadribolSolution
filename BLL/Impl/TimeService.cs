@@ -23,10 +23,10 @@ namespace BLL.Impl
         {
             Response response = new Response();
 
-            if (time.Competidor.Count < 7)
-            {
-                response.Erros.Add("O time deve ter 7 competidores!");
-            }
+            //if (time.Competidor.Count < 7)
+            //{
+            //    response.Erros.Add("O time deve ter 7 competidores!");
+            //}
 
 
             if (response.Erros.Count > 0)

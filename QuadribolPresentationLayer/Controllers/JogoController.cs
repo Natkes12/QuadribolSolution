@@ -19,12 +19,14 @@ namespace QuadribolPresentationLayer.Controllers
         private IJogoService _jogoService;
         private ITimeRepository _timeRepository;
         private INarradorRepository _narradorRepository;
+        private IUsuarioService _usuarioService;
 
-        public JogoController(IJogoService jogo, ITimeRepository time, INarradorRepository narrador)
+        public JogoController(IJogoService jogo, ITimeRepository time, INarradorRepository narrador, IUsuarioService usuairo)
         {
             this._jogoService = jogo;
             this._timeRepository = time;
             this._narradorRepository = narrador;
+            this._usuarioService = usuairo;
         }
 
 
@@ -53,6 +55,23 @@ namespace QuadribolPresentationLayer.Controllers
 
         public async Task<IActionResult> Cadastrar()
         {
+            Usuario usuario = new Usuario();
+
+            try
+            {
+                int usuarioId = Convert.ToInt32(Request.Cookies["USERIDENTITY"].ToString());
+                usuario = await _usuarioService.GetUsuario(usuarioId);
+            }
+            catch (NullReferenceException)
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
+
+            if (usuario.Permissao != Entity.Enums.Permissao.Administrador)
+            {
+                return RedirectToAction("Index", "Jogo");
+            }
+
             DataResponse<Time> times = await _timeRepository.GetTimes();
             DataResponse<Narrador> narradores = await _narradorRepository.GetNarradores();
 
@@ -62,10 +81,12 @@ namespace QuadribolPresentationLayer.Controllers
                 cfg.CreateMap<Narrador, NarradorQueryViewModel>();
             });
             IMapper mapper = configuration.CreateMapper();
-            List<TimeQueryViewModel> dadosTime = mapper.Map<List<TimeQueryViewModel>>(times.Data);
-            List<TimeQueryViewModel> dadosNarrador = mapper.Map<List<TimeQueryViewModel>>(narradores.Data);
+            List<TimeQueryViewModel> dadosTime = mapper.Map<List<TimeQueryViewModel>>(times.Data.Result);
 
             ViewBag.Times = dadosTime;
+
+            List<NarradorQueryViewModel> dadosNarrador = mapper.Map<List<NarradorQueryViewModel>>(narradores.Data.Result);
+
             ViewBag.Narradores = dadosNarrador;
 
             return View();

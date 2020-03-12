@@ -8,10 +8,7 @@ namespace QuadribolPresentationLayer.Models.Insert
 {
     public class JogoInsertViewModel
     {
-        public int Time1ID { get; set; }
-        public int Time2ID { get; set; }
-        public DateTime DataJogo { get; set; }
-        public int Pontuacao { get; set; }
-        public int NarradorID { get; set; }
+        public virtual Time Time { get; set; }
+        public virtual Jogo Jogo { get; set; }
     }
 }
