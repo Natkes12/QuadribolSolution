@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Entity
 {
+    [Table("USUARIOS")]
     public class Usuario
     {
         public int ID { get; set; }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Entity
 {
-    [Table("Times")]
+    [Table("TIMES")]
     public class Time
     {
         public int ID { get; set; }
