@@ -76,7 +76,7 @@ namespace QuadribolPresentationLayer.Controllers
                 //var X = Request.Cookies["USERIDENTITY"].ToString();
                 if (usuario.Permissao == Entity.Enums.Permissao.Administrador)
                 {
-                    return RedirectToAction("Cadastro", "Jogo");
+                    return RedirectToAction("Cadastrar", "Jogo");
                 }
                 else
                 {
