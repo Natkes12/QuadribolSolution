@@ -27,6 +27,10 @@ namespace BLL.Impl
             {
                 response.Erros.Add("O nome do narrador deve ser informado.");
             }
+            else if(narrador.Nome.Length < 2 || narrador.Nome.Length > 50)
+            {
+                response.Erros.Add("O nome do narrador deve conyter entre 2 e 50 caracteres.");
+            }
 
             if (response.Erros.Count > 0)
             {

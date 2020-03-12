@@ -28,6 +28,10 @@ namespace BLL
             {
                 response.Erros.Add("O nome do competidor deve ser informado.");
             }
+            else if (competidor.Nome.Length < 2 || competidor.Nome.Length > 50)
+            {
+                response.Erros.Add("O nome do competidor deve ser informado.");
+            }
 
             if (response.Erros.Count > 0)
             {
