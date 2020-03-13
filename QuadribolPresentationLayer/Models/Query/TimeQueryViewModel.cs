@@ -9,7 +9,8 @@ namespace QuadribolPresentationLayer.Models.Query
 {
     public class TimeQueryViewModel
     {
-        public virtual Time Time { get; set; }
-        public virtual Competidor Competidor { get; set; }
+        public int ID { get; set; }
+        public List<Competidor> Competidor { get; set; }
+        public Casa Casa { get; set; }
     }
 }
