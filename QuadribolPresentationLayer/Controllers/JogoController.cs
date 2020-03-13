@@ -20,13 +20,17 @@ namespace QuadribolPresentationLayer.Controllers
         private ITimeRepository _timeRepository;
         private INarradorRepository _narradorRepository;
         private IUsuarioService _usuarioService;
+        private IJogoTimeRepository _jogoTimeRepository;
+        private IJogoTimeService _jogoTimeService;
 
-        public JogoController(IJogoService jogo, ITimeRepository time, INarradorRepository narrador, IUsuarioService usuairo)
+        public JogoController(IJogoTimeService jogoTimeService, IJogoTimeRepository jogoTime, IJogoService jogo, ITimeRepository time, INarradorRepository narrador, IUsuarioService usuairo)
         {
             this._jogoService = jogo;
             this._timeRepository = time;
             this._narradorRepository = narrador;
             this._usuarioService = usuairo;
+            this._jogoTimeRepository = jogoTime;
+            this._jogoTimeService = jogoTimeService;
         }
 
 
@@ -93,18 +97,21 @@ namespace QuadribolPresentationLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Cadastrar(JogoInsertViewModel viewModel)
+        public async Task<IActionResult> Cadastrar(List<JogoTimeInsertViewModel> viewModel)
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<JogoInsertViewModel, Jogo>();
+                cfg.CreateMap<List<JogoTimeInsertViewModel>, List<JogoTime>>();
             });
             IMapper mapper = configuration.CreateMapper();
-            Jogo jogo = mapper.Map<Jogo>(viewModel);
+            List<JogoTime> jogoTime = mapper.Map<List<JogoTime>>(viewModel);
 
             try
             {
-                await this._jogoService.Insert(jogo);
+                foreach (var item in jogoTime)
+                {
+                    await this._jogoTimeService.Insert(item);
+                }
                 return RedirectToAction("Index", "Jogo");
             }
             catch (Exception ex)

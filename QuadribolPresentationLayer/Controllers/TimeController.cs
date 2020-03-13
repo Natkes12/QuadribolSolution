@@ -113,10 +113,12 @@ namespace QuadribolPresentationLayer.Controllers
                 cfg.CreateMap<Time, TimeQueryViewModel>();
             });
             IMapper mapper = configuration.CreateMapper();
-            List<CompetidorQueryViewModel> dadosCompetidores = mapper.Map<List<CompetidorQueryViewModel>>(competidores.Data);
-            List<TimeQueryViewModel> dadosTimes = mapper.Map<List<TimeQueryViewModel>>(times.Data);
+            List<CompetidorQueryViewModel> dadosCompetidores = mapper.Map<List<CompetidorQueryViewModel>>(competidores.Data.Result);
 
             ViewBag.Competidores = dadosCompetidores;
+
+            List<TimeQueryViewModel> dadosTimes = mapper.Map<List<TimeQueryViewModel>>(times.Data.Result);
+
             ViewBag.Time = dadosTimes;
             ViewBag.Casa = _casa;
 

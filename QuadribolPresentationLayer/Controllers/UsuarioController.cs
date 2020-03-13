@@ -30,7 +30,7 @@ namespace QuadribolPresentationLayer.Controllers
                 int usuarioId = Convert.ToInt32(Request.Cookies["USERIDENTITY"].ToString());
                 usuario = await _usuarioService.GetUsuario(usuarioId);
             }
-            catch(NullReferenceException ex)
+            catch (NullReferenceException ex)
             {
                 return RedirectToAction("Login", "Usuario");
             }
@@ -51,7 +51,7 @@ namespace QuadribolPresentationLayer.Controllers
 
                 IMapper mapper = configuration.CreateMapper();
 
-                List<UsuarioQueryViewModel> dados = mapper.Map<List<UsuarioQueryViewModel>>(usuarios.Data.Result);
+                List<UsuarioQueryViewModel> dados = mapper.Map<List<UsuarioQueryViewModel>>(usuarios.Data);
 
                 return View(dados);
             }
@@ -92,22 +92,22 @@ namespace QuadribolPresentationLayer.Controllers
 
         public async Task<IActionResult> Cadastrar()
         {
-            Usuario usuario = new Usuario();
+            //Usuario usuario = new Usuario();
 
-            try
-            {
-                int usuarioId = Convert.ToInt32(Request.Cookies["USERIDENTITY"].ToString());
-                usuario = await _usuarioService.GetUsuario(usuarioId);
-            }
-            catch (NullReferenceException)
-            {
-                return RedirectToAction("Login", "Usuario");
-            }
+            //try
+            //{
+            //    int usuarioId = Convert.ToInt32(Request.Cookies["USERIDENTITY"].ToString());
+            //    usuario = await _usuarioService.GetUsuario(usuarioId);
+            //}
+            //catch (NullReferenceException)
+            //{
+            //    return RedirectToAction("Login", "Usuario");
+            //}
 
-            if (usuario.Permissao != Entity.Enums.Permissao.Administrador)
-            {
-                return RedirectToAction("Index", "Jogo");
-            }
+            //if (usuario.Permissao != Entity.Enums.Permissao.Administrador)
+            //{
+            //    return RedirectToAction("Index", "Jogo");
+            //}
 
             return View();
         }

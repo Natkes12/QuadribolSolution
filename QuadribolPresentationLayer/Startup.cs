@@ -46,6 +46,8 @@ namespace QuadribolPresentationLayer
             services.AddTransient<ITimeService, TimeService>();
             services.AddTransient<ITimeCompetidorRepository, TimeCompetidorRepository>();
             services.AddTransient<ITimeCompetidorService, TimeCompetidorService>();
+            services.AddTransient<IJogoTimeRepository, JogoTimeRepository>();
+            services.AddTransient<IJogoTimeService, JogoTimeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
