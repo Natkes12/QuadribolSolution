@@ -66,6 +66,14 @@ namespace BLL.Impl
             }
         }
 
+        public Task<Response> Update(Jogo jogo)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task<Response> Delete(Jogo jogo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -83,6 +83,14 @@ namespace BLL
 
         }
 
+        public Task<Response> Update(Competidor competidor)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task<Response> Delete(Competidor competidor)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

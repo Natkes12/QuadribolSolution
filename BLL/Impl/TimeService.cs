@@ -72,5 +72,14 @@ namespace BLL.Impl
             }
         }
 
+        public Task<Response> Update(Time time)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response> Delete(Time time)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

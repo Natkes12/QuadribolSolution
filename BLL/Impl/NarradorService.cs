@@ -76,6 +76,16 @@ namespace BLL.Impl
             }
 
         }
+
+        public Task<Response> Update(Narrador narrador)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response> Delete(Narrador narrador)
+        {
+            throw new NotImplementedException();
+        }
     }
 
        

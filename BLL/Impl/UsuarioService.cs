@@ -48,6 +48,11 @@ namespace BLL.Impl
 
         }
 
+        public Task<Response> Delete(Usuario usuario)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Usuario> GetUsuario(int id)
         {
             try
@@ -140,6 +145,11 @@ namespace BLL.Impl
                 File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
                 return response;
             }
+        }
+
+        public Task<Response> Update(Usuario usuario)
+        {
+            throw new NotImplementedException();
         }
     }
 }
