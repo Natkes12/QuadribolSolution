@@ -98,8 +98,9 @@
                     $("#erroNome").html("");
                 }              
 
-                if (true) {
-
+                if (escolaridade == "Primeiro" || escolaridade == "Segundo" || escolaridade == "Terceiro") {
+                     $("#erroEscolaridade").html("Para se inscrever como competidor o aluno deve estar cursando no mínimo o quarto ano.");
+                    sucesso = false;
                 }
 
                  if (!sucesso) {
