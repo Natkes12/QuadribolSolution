@@ -129,14 +129,17 @@ namespace QuadribolPresentationLayer.Controllers
 
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<TimeCompetidorInsertViewModel, TimeCompetidor>();
+                cfg.CreateMap<List<TimeCompetidorInsertViewModel>, List<TimeCompetidor>>();
             });
             IMapper mapper = configuration.CreateMapper();
-            TimeCompetidor time = mapper.Map<TimeCompetidor>(viewModel);
+            List<TimeCompetidor> time = mapper.Map<List<TimeCompetidor>>(viewModel);
 
             try
             {
-                await this._timeService.Insert(time);
+                foreach (var item in time)
+                {
+                    await this._timeCompetidorService.Insert(item);
+                }
                 return RedirectToAction("Index", "Time");
             }
             catch (Exception ex)
