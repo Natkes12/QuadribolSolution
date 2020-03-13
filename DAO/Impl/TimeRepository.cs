@@ -43,11 +43,9 @@ namespace DAO.Impl
 
             try
             {
-
                 this._context.Times.Add(time);
                 await this._context.SaveChangesAsync();
                 response.Sucesso = true;
-
             }
             catch (Exception ex)
             {

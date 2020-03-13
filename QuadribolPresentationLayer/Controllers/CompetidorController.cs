@@ -12,9 +12,6 @@ namespace QuadribolPresentationLayer.Controllers
 {
     public class CompetidorController : Controller
     {
-
-        
-
         private ICompetidorService _competidorService;
         private IUsuarioService _usuarioService;
 

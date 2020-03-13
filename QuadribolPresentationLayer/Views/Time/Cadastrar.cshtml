@@ -10,13 +10,21 @@
     <form method="post">
 
         @{
-            Entity.Enums.Casa casa = ViewBag.Casa;
+            string casa = "";
         }
 
         <div class="form-group">
             <label class="control-label col-md-2">Casa do Time</label>
             <div class="col-md-10">
-                <input name="Casa" id="Casa" type="text" value="@ViewBag.Casa" readonly />
+                <input name="Casa" id="Casa" type="text" 
+                       @foreach (var item in ViewBag.Time)
+                       {
+                           if (item.Casa == ViewBag.Casa)
+                           {
+                               casa = Enum.GetName(typeof(Entity.Enums.Casa), item.Casa);
+                           }
+                       }
+                       value="@casa" readonly />
             </div>
         </div>
 
@@ -26,7 +34,7 @@
                 <select class="form-control" name="Artilheiro1" id="Artilheiro1">
                     @foreach (var item in ViewBag.Competidores)
                     {
-                        if (item.Casa == casa)
+                        if (item.Casa == ViewBag.Casa)
                         {
                             if (item.Funcao == Entity.Enums.Funcao.Artilheiro)
                             {
@@ -44,7 +52,7 @@
                 <select class="form-control" name="Artilheiro2" id="Artilheiro2">
                     @foreach (var item in ViewBag.Competidores)
                     {
-                        if (item.Casa == casa)
+                        if (item.Casa == ViewBag.Casa)
                         {
                             if (item.Funcao == Entity.Enums.Funcao.Artilheiro)
                             {
@@ -62,7 +70,7 @@
                 <select class="form-control" name="Artilheiro3" id="Artilheiro3">
                     @foreach (var item in ViewBag.Competidores)
                     {
-                        if (item.Casa == casa)
+                        if (item.Casa == ViewBag.Casa)
                         {
                             if (item.Funcao == Entity.Enums.Funcao.Artilheiro)
                             {
@@ -83,7 +91,7 @@
                 <select class="form-control" name="Batedor1" id="Batedor1">
                     @foreach (var item in ViewBag.Competidores)
                     {
-                        if (item.Casa == casa)
+                        if (item.Casa == ViewBag.Casa)
                         {
                             if (item.Funcao == Entity.Enums.Funcao.Batedor)
                             {
@@ -101,7 +109,7 @@
                 <select class="form-control" name="Batedor2" id="Batedor2">
                     @foreach (var item in ViewBag.Competidores)
                     {
-                        if (item.Casa == casa)
+                        if (item.Casa == ViewBag.Casa)
                         {
                             if (item.Funcao == Entity.Enums.Funcao.Batedor)
                             {
@@ -122,7 +130,7 @@
                     <select class="form-control" name="Apanhador" id="Apanhador">
                         @foreach (var item in ViewBag.Competidores)
                         {
-                            if (item.Casa == casa)
+                            if (item.Casa == ViewBag.Casa)
                             {
                                 if (item.Funcao == Entity.Enums.Funcao.Apanhador)
                                 {
@@ -144,7 +152,7 @@
                     <select class="form-control" name="Goleiro" id="Goleiro">
                         @foreach (var item in ViewBag.Competidores)
                         {
-                            if (item.Casa == casa)
+                            if (item.Casa == ViewBag.Casa)
                             {
                                 if (item.Funcao == Entity.Enums.Funcao.Goleiro)
                                 {

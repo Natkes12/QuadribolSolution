@@ -10,8 +10,8 @@ namespace Entity
     public class Time
     {
         public int ID { get; set; }
-        public List<Competidor> Competidor { get; set; }
         public Casa Casa { get; set; }
+        public ICollection<TimeCompetidor> TimeCompetidores { get; set; }
         public virtual ICollection<JogoTime> Jogos { get; set; }
 
         public Time()

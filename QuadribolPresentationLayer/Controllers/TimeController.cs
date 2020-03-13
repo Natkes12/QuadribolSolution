@@ -16,14 +16,18 @@ namespace QuadribolPresentationLayer.Controllers
     public class TimeController : Controller
     {
         private ITimeService _timeService;
+        private ITimeCompetidorService _timeCompetidorService;
         private ICompetidorRepository _competidorRepository;
+        private ITimeRepository _timeRepository;
         private IUsuarioService _usuarioService;
         private static Casa _casa;
 
-        public TimeController(ITimeService time, ICompetidorRepository competidor, IUsuarioService usuario)
+        public TimeController(ITimeCompetidorService timeCompetidor, ITimeService time, ICompetidorRepository competidor, IUsuarioService usuario, ITimeRepository timeRepo)
         {
             this._timeService = time;
+            _timeCompetidorService = timeCompetidor;
             this._competidorRepository = competidor;
+            this._timeRepository = timeRepo;
             this._usuarioService = usuario;
         }
 
@@ -32,7 +36,7 @@ namespace QuadribolPresentationLayer.Controllers
 
             try
             {
-                DataResponse<Time> times = await _timeService.GetTimes();
+                DataResponse<Time> times = await _timeRepository.GetTimes();
 
                 var configuration = new MapperConfiguration(cfg =>
                 {
@@ -57,10 +61,28 @@ namespace QuadribolPresentationLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> FiltrarCasa(Casa casa)
+        public async Task<IActionResult> FiltrarCasa(TimeInsertViewModel viewModel)
         {
-            _casa = casa;
-            return RedirectToAction("Cadastrar", "Time");
+            _casa = viewModel.Casa;
+
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TimeInsertViewModel, Time>();
+            });
+            IMapper mapper = configuration.CreateMapper();
+            Time time = mapper.Map<Time>(viewModel);
+
+            try
+            {
+                await this._timeService.Insert(time);
+                return RedirectToAction("Cadastrar", "Time");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Errors = ex.Message;
+                return View();
+            }
+
         }
 
         public async Task<IActionResult> Cadastrar()
@@ -83,29 +105,34 @@ namespace QuadribolPresentationLayer.Controllers
             }
 
             DataResponse<Competidor> competidores = await _competidorRepository.GetCompetidores();
+            DataResponse<Time> times = await _timeRepository.GetTimes();
 
             var configuration = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Competidor, CompetidorQueryViewModel>();
+                cfg.CreateMap<Time, TimeQueryViewModel>();
             });
             IMapper mapper = configuration.CreateMapper();
-            List<CompetidorQueryViewModel> dadosCompetidores = mapper.Map<List<CompetidorQueryViewModel>>(competidores.Data.Result);
+            List<CompetidorQueryViewModel> dadosCompetidores = mapper.Map<List<CompetidorQueryViewModel>>(competidores.Data);
+            List<TimeQueryViewModel> dadosTimes = mapper.Map<List<TimeQueryViewModel>>(times.Data);
 
             ViewBag.Competidores = dadosCompetidores;
+            ViewBag.Time = dadosTimes;
             ViewBag.Casa = _casa;
 
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Cadastrar(TimeInsertViewModel viewModel)
+        public async Task<IActionResult> Cadastrar(List<TimeCompetidorInsertViewModel> viewModel)
         {
+
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<TimeInsertViewModel, Time>();
+                cfg.CreateMap<TimeCompetidorInsertViewModel, TimeCompetidor>();
             });
             IMapper mapper = configuration.CreateMapper();
-            Time time = mapper.Map<Time>(viewModel);
+            TimeCompetidor time = mapper.Map<TimeCompetidor>(viewModel);
 
             try
             {
@@ -115,9 +142,10 @@ namespace QuadribolPresentationLayer.Controllers
             catch (Exception ex)
             {
                 ViewBag.Errors = ex.Message;
+                return View();
             }
 
-            return View();
+
         }
     }
 }

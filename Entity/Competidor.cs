@@ -18,7 +18,12 @@ namespace Entity
         public Funcao Funcao { get; set; }
         public bool Disponivel { get; set; }
         public bool EhAtivo { get; set; }
+        public virtual ICollection<TimeCompetidor> Time { get; set; }
 
+        public Competidor()
+        {
+            this.Time = new List<TimeCompetidor>();
+        }
     }
 
 }
