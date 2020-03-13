@@ -33,6 +33,11 @@ namespace BLL
                 response.Erros.Add("O nome do competidor deve ser informado.");
             }
 
+            if (competidor.Escolaridade < Entity.Enums.Escolaridade.Quarto)
+            {
+                response.Erros.Add("Para se inscrever como competidor o aluno deve estar cursando no mínimo o quarto ano.");
+            }
+
             if (response.Erros.Count > 0)
             {
                 response.Sucesso = false;
