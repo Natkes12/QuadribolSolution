@@ -82,6 +82,7 @@
             $("#BotaoEnviar").click(function (e) {
 
                 var nome = $("#Nome").val();
+                var escolaridade = $("#Escolaridade").val(); 
 
                 var sucesso = true;
 
@@ -96,6 +97,11 @@
                 else {
                     $("#erroNome").html("");
                 }              
+
+                if (true) {
+
+                }
+
                  if (!sucesso) {
                     e.preventDefault();
                 }
