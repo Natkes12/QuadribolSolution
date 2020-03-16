@@ -8,67 +8,68 @@
 <div class="form-horizontal">
 
     <form method="post">
-        <div class="form-group">
-            <label class="control-label col-md-2">Nome</label>
-            <div class="col-md-10">
-                <input class="form-control" type="text" name="Nome" id="Nome" />
-                <span class="text-danger" id="erroNome" name="erroNome"></span>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Nome</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" name="Nome" id="Nome" />
+                    <span class="text-danger" id="erroNome" name="erroNome"></span>
+                </div>
             </div>
-        </div>
 
-        @{
-            string[] casa = Enum.GetNames(typeof(Entity.Enums.Casa));
-        }
+            @{
+                string[] casa = Enum.GetNames(typeof(Entity.Enums.Casa));
+            }
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Casa</label>
-            <div class="col-md-10">
-                <select class="form-control" name="Casa" id="Casa">
-                    @for (int i = 0; i < casa.Length; i++)
-                    {
-                        <option value="@i">@casa[i]</option>
-                    }
-                </select>
+            <div class="form-group">
+                <label class="control-label col-md-2">Casa</label>
+                <div class="col-md-10">
+                    <select class="form-control" name="Casa" id="Casa">
+                        @for (int i = 0; i < casa.Length; i++)
+                        {
+                            <option value="@i">@casa[i]</option>
+                        }
+                    </select>
+                </div>
             </div>
-        </div>
 
-        @{ 
-            string[] escolaridade = Enum.GetNames(typeof(Entity.Enums.Escolaridade));
-        }
+            @{
+                string[] escolaridade = Enum.GetNames(typeof(Entity.Enums.Escolaridade));
+            }
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Escolaridade</label>
-            <div class="col-md-10">
-                <select class="form-control" name="Escolaridade" id="Escolaridade">
-                    @for (int i = 0; i < escolaridade.Length; i++)
-                    {
-                        <option value="@i">@escolaridade[i]</option>
-                    }
-                </select>
+            <div class="form-group">
+                <label class="control-label col-md-2">Escolaridade</label>
+                <div class="col-md-10">
+                    <select class="form-control" name="Escolaridade" id="Escolaridade">
+                        @for (int i = 0; i < escolaridade.Length; i++)
+                        {
+                            <option value="@i">@escolaridade[i]</option>
+                        }
+                    </select>
+                </div>
             </div>
-        </div>
 
-        @{
-            string[] funcao = Enum.GetNames(typeof(Entity.Enums.Funcao));
-        }
+            @{
+                string[] funcao = Enum.GetNames(typeof(Entity.Enums.Funcao));
+            }
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Função</label>
-            <div class="col-md-10">
-                <select class="form-control" name="Funcao" id="Funcao">
-                    @for (int i = 0; i < funcao.Length; i++)
-                    {
-                        <option value="@i">@funcao[i]</option>
-                    }
-                </select>
+            <div class="form-group">
+                <label class="control-label col-md-2">Função</label>
+                <div class="col-md-10">
+                    <select class="form-control" name="Funcao" id="Funcao">
+                        @for (int i = 0; i < funcao.Length; i++)
+                        {
+                            <option value="@i">@funcao[i]</option>
+                        }
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-10">
-                <input name="BotaoEnviar" id="BotaoEnviar" type="submit" value="Cadastrar" />
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input name="BotaoEnviar" id="BotaoEnviar" type="submit" value="Cadastrar" />
+                </div>
             </div>
-        </div>
 
     </form>
 </div>

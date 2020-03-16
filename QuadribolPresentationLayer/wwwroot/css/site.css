@@ -1,8 +1,31 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-</style >
+@font-face {
+    font-family: 'magicschooltwo';
+    src: url('../fonts/magicschooltwo.ttf') format('truetype');
+}
 
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    color: black;
+}
+
+header{
+    color: black;
+    font-size: 40px;
+    background-color: lightskyblue;
+}
+
+indexCronograma {
+    font-size: 80px;
+    color: white;
+    text-align: center;
+}
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -22,18 +45,19 @@ a {
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #1b6ec2;
+  background-color: lightskyblue;
   border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+  font-size: 50px;
+  color : black;
 }
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 35px;
   }
 }
 
@@ -62,17 +86,23 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
-    background-image: url("/images/fundo4.jpg");
+    color: black;
+    background-color: lightskyblue;
+    font-family: 'magicschooltwo';
+    background-image: url("/images/fundo5.jpg");
     background-repeat: no-repeat;
+    line-height : 25px;
     background-attachment: fixed;
     background-size: cover;
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    font-size: 25px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    color: black;
+    line-height: 65px; /* Vertically center the text there */
 }
+
