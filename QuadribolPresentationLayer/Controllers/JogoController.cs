@@ -76,8 +76,8 @@ namespace QuadribolPresentationLayer.Controllers
                 return RedirectToAction("Index", "Jogo");
             }
 
-            DataResponse<Time> times = await _timeRepository.GetTimes();
-            DataResponse<Narrador> narradores = await _narradorRepository.GetNarradores();
+            List<Time> times = await _timeRepository.GetTimes().Result.Data;
+            List<Narrador> narradores = await _narradorRepository.GetNarradores().Result.Data;
 
             var configuration = new MapperConfiguration(cfg =>
             {
@@ -85,11 +85,11 @@ namespace QuadribolPresentationLayer.Controllers
                 cfg.CreateMap<Narrador, NarradorQueryViewModel>();
             });
             IMapper mapper = configuration.CreateMapper();
-            List<TimeQueryViewModel> dadosTime = mapper.Map<List<TimeQueryViewModel>>(times.Data.Result);
+            List<TimeQueryViewModel> dadosTime = mapper.Map<List<TimeQueryViewModel>>(times);
 
             ViewBag.Times = dadosTime;
 
-            List<NarradorQueryViewModel> dadosNarrador = mapper.Map<List<NarradorQueryViewModel>>(narradores.Data.Result);
+            List<NarradorQueryViewModel> dadosNarrador = mapper.Map<List<NarradorQueryViewModel>>(narradores);
 
             ViewBag.Narradores = dadosNarrador;
 

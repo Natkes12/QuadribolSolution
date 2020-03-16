@@ -124,7 +124,7 @@ namespace QuadribolPresentationLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Cadastrar(List<TimeCompetidorInsertViewModel> viewModel)
+        public async Task<IActionResult> Cadastrar(List<CompetidorInsertViewModel> viewModel)
         {
 
             var configuration = new MapperConfiguration(cfg =>
