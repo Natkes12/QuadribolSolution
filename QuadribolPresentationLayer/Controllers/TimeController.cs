@@ -104,8 +104,8 @@ namespace QuadribolPresentationLayer.Controllers
                 return RedirectToAction("Index", "Jogo");
             }
 
-            DataResponse<Competidor> competidores = await _competidorRepository.GetCompetidores();
-            DataResponse<Time> times = await _timeRepository.GetTimes();
+            List<Competidor> competidores = await _competidorRepository.GetCompetidores().Result.Data;
+            List<Time> times = await _timeRepository.GetTimes().Result.Data;
 
             var configuration = new MapperConfiguration(cfg =>
             {
@@ -113,12 +113,10 @@ namespace QuadribolPresentationLayer.Controllers
                 cfg.CreateMap<Time, TimeQueryViewModel>();
             });
             IMapper mapper = configuration.CreateMapper();
-            List<CompetidorQueryViewModel> dadosCompetidores = mapper.Map<List<CompetidorQueryViewModel>>(competidores.Data.Result);
+            List<TimeQueryViewModel> dadosTimes = mapper.Map<List<TimeQueryViewModel>>(times);
+            List<CompetidorQueryViewModel> dadosCompetidores = mapper.Map<List<CompetidorQueryViewModel>>(competidores);
 
             ViewBag.Competidores = dadosCompetidores;
-
-            List<TimeQueryViewModel> dadosTimes = mapper.Map<List<TimeQueryViewModel>>(times.Data.Result);
-
             ViewBag.Time = dadosTimes;
             ViewBag.Casa = _casa;
 
