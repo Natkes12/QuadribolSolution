@@ -14,3 +14,4 @@ namespace BLL.Interfaces
         Task<DataResponse<JogoTime>> GetData();
     }
 }
+
