@@ -116,7 +116,7 @@ namespace QuadribolPresentationLayer.Controllers
             List<TimeQueryViewModel> dadosTimes = mapper.Map<List<TimeQueryViewModel>>(times);
             List<CompetidorQueryViewModel> dadosCompetidores = mapper.Map<List<CompetidorQueryViewModel>>(competidores);
 
-            ViewBag.Competidores = dadosCompetidores;
+            ViewBag.Competidores = competidores;
             ViewBag.Time = dadosTimes;
             ViewBag.Casa = _casa;
 
@@ -124,22 +124,38 @@ namespace QuadribolPresentationLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Cadastrar(List<CompetidorInsertViewModel> viewModel)
+        public async Task<IActionResult> Cadastrar(TimeInsertViewModel viewModel)
         {
+            List<Competidor> competidores = new List<Competidor>();
+            Competidor Artilheiro1 = new Competidor();
+            Artilheiro1.Nome = "Batata";
+            Artilheiro1.Casa = Casa.Grifinoria;
+            Artilheiro1.Escolaridade = Escolaridade.Sexto;
+            Artilheiro1.Funcao = Funcao.Artilheiro;
+            competidores.Add(Artilheiro1);
+            //competidores.Add(viewModel.Artilheiro2);
+            //competidores.Add(viewModel.Artilheiro3);
+            //competidores.Add(viewModel.Batedor1);
+            //competidores.Add(viewModel.Batedor2);
+            //competidores.Add(viewModel.Apanhador);
+            //competidores.Add(viewModel.Goleiro);
 
-            var configuration = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<List<TimeCompetidorInsertViewModel>, List<TimeCompetidor>>();
-            });
-            IMapper mapper = configuration.CreateMapper();
-            List<TimeCompetidor> time = mapper.Map<List<TimeCompetidor>>(viewModel);
+            Time time = new Time();
+            time.Competidores = competidores;
+            time.Casa = _casa;
+
+            //tempTimeCompetidor.Time = time;
+
+            //var configuration = new MapperConfiguration(cfg =>
+            //{
+            //    cfg.CreateMap<List<TimeCompetidorInsertViewModel>, List<TimeCompetidor>>();
+            //});
+            //IMapper mapper = configuration.CreateMapper();
+            //List<TimeCompetidor> timeCompetidor = mapper.Map<List<TimeCompetidor>>(viewModel);
 
             try
             {
-                foreach (var item in time)
-                {
-                    await this._timeCompetidorService.Insert(item);
-                }
+                await this._timeService.Insert(time);
                 return RedirectToAction("Index", "Time");
             }
             catch (Exception ex)

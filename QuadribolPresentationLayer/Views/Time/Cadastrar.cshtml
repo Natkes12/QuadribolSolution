@@ -28,11 +28,15 @@
             </div>
         </div>
 
+        @{ 
+            List<Entity.Competidor> competidores = ViewBag.Competidores;
+        }
+
         <div class="form-group">
             <label class="control-label col-md-2">Artilheiro 1</label>
             <div class="col-md-10">
                 <select class="form-control" name="Artilheiro1" id="Artilheiro1">
-                    @foreach (var item in ViewBag.Competidores)
+                    @foreach (var item in competidores)
                     {
                         if (item.Casa == ViewBag.Casa)
                         {

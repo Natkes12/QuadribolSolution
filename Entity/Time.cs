@@ -11,7 +11,7 @@ namespace Entity
     {
         public int ID { get; set; }
         public Casa Casa { get; set; }
-        public ICollection<TimeCompetidor> TimeCompetidores { get; set; }
+        public ICollection<Competidor> Competidores { get; set; }
         public virtual ICollection<JogoTime> Jogos { get; set; }
 
         public Time()
