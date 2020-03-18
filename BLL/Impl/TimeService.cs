@@ -2,6 +2,7 @@
 using DAO;
 using DAO.Interfaces;
 using Entity;
+using Entity.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -80,6 +81,19 @@ namespace BLL.Impl
         public Task<Response> Delete(Time time)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Time> GetByCasa(Casa casa)
+        {     
+            try
+            {
+                return await _timeRepository.GetByCasa(casa);
+            }
+            catch (Exception ex)
+            {
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+                throw new Exception("Erro no banco de dados, contate o administrador");
+            }
         }
     }
 }

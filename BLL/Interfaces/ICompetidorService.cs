@@ -11,6 +11,7 @@ namespace BLL.Interfaces
        Task<Response> Insert(Competidor competidor);
        Task<Response> Update(Competidor competidor);
        Task<Response> Delete(Competidor competidor);
-        Task<DataResponse<Competidor>> GetCompetidores();
+       Task<DataResponse<Competidor>> GetCompetidores();
+       Task<Competidor> GetByID(int id);   
     }
 }

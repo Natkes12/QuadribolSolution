@@ -1,4 +1,5 @@
 ﻿using Entity;
+using Entity.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,5 +13,7 @@ namespace BLL.Interfaces
         Task<Response> Update(Time time);
         Task<Response> Delete(Time time);
         Task<DataResponse<Time>> GetTimes();
+        Task<Time> GetByCasa(Casa casa);
+
     }
 }
