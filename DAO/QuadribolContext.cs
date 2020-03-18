@@ -24,7 +24,7 @@ namespace DAO
 
             modelBuilder.Entity<JogoTime>().HasKey(c => new { c.TimeID, c.JogoID });
             modelBuilder.Entity<JogoTime>().HasOne(c => c.Jogo).WithMany(c => c.JogosTime).HasForeignKey(c => c.JogoID);
-            modelBuilder.Entity<JogoTime>().HasOne(c => c.Time).WithMany(c => c.Jogos).HasForeignKey(c => c.TimeID);
+            modelBuilder.Entity<JogoTime>().HasOne(c => c.Time).WithMany(c => c.JogosTime).HasForeignKey(c => c.TimeID);
 
             //modelBuilder.Entity<TimeCompetidor>().HasKey(c => new { c.TimeID, c.CompetidorID });
             //modelBuilder.Entity<TimeCompetidor>().HasOne(c => c.Competidor).WithMany(c => c.Time).HasForeignKey(c => c.CompetidorID);
