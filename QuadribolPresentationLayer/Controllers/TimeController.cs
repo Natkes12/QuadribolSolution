@@ -16,16 +16,14 @@ namespace QuadribolPresentationLayer.Controllers
     public class TimeController : Controller
     {
         private ITimeService _timeService;
-        private ITimeCompetidorService _timeCompetidorService;
         private ICompetidorRepository _competidorRepository;
         private ITimeRepository _timeRepository;
         private IUsuarioService _usuarioService;
         private static Casa _casa;
 
-        public TimeController(ITimeCompetidorService timeCompetidor, ITimeService time, ICompetidorRepository competidor, IUsuarioService usuario, ITimeRepository timeRepo)
+        public TimeController(ITimeService time, ICompetidorRepository competidor, IUsuarioService usuario, ITimeRepository timeRepo)
         {
             this._timeService = time;
-            _timeCompetidorService = timeCompetidor;
             this._competidorRepository = competidor;
             this._timeRepository = timeRepo;
             this._usuarioService = usuario;
