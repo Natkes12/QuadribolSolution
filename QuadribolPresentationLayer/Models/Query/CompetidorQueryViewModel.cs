@@ -1,4 +1,5 @@
-﻿using Entity.Enums;
+﻿using Entity;
+using Entity.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,7 @@ namespace QuadribolPresentationLayer.Models.Query
         public Funcao Funcao { get; set; }
         public bool Disponivel { get; set; }
         public bool EhAtivo { get; set; }
+        public Time Time { get; set; }
+        public int? TimeID { get; set; }
     }
 }
