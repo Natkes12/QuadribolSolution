@@ -72,6 +72,14 @@ namespace QuadribolPresentationLayer.Controllers
             IMapper mapper = configuration.CreateMapper();
             Time time = mapper.Map<Time>(viewModel);
 
+            Time timeTemp = await this._timeRepository.GetByCasa(time.Casa);
+
+            if (timeTemp != null)
+            {
+                ViewBag.Errors = "O time não pode ser criado pois já existe um time com a mesma casa.";
+                return View();
+            }
+
             try
             {
                 await this._timeService.Insert(time);
