@@ -5,9 +5,6 @@ for details on configuring this project to bundle and minify static web assets. 
     font-family: 'magicschooltwo'; 
     src: url('../fonts/magicschooltwo.ttf') format('truetype');
 }
-.container-login100 {
-    background-image: url("/images/fundo5.jpg");
-}
 
 .container {
     width: 100%;

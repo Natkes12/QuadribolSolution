@@ -18,7 +18,7 @@ namespace BLL.Impl
             this._jogoTimeRepository = jogoTimeRepository;
         }
 
-        public async Task<Response> Delete(JogoTime jogoTime)
+        public Task<Response> Delete(int jogoID, int timeID)
         {
             throw new NotImplementedException();
         }
@@ -28,7 +28,7 @@ namespace BLL.Impl
             return await _jogoTimeRepository.GetData();
         }
 
-        public async Task<Response> Insert(JogoTime jogoTime)
+        public async Task<Response> Insert(int jogoID, int timeID)
         {
             Response response = new Response();
 
@@ -40,7 +40,7 @@ namespace BLL.Impl
 
             try
             {
-                await _jogoTimeRepository.Insert(jogoTime);
+                await _jogoTimeRepository.Insert(jogoID, timeID);
                 response.Sucesso = true;
                 return response;
             }
@@ -53,7 +53,7 @@ namespace BLL.Impl
             }
         }
 
-        public async Task<Response> Update(JogoTime jogoTime)
+        public Task<Response> Update(int jogoID, int timeID)
         {
             throw new NotImplementedException();
         }

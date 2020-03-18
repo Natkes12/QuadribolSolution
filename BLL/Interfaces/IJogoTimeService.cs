@@ -8,9 +8,9 @@ namespace BLL.Interfaces
 {
     public interface IJogoTimeService
     {
-        Task<Response> Insert(JogoTime jogoTime);
-        Task<Response> Update(JogoTime jogoTime);
-        Task<Response> Delete(JogoTime jogoTime);
+        Task<Response> Insert(int jogoID, int timeID);
+        Task<Response> Update(int jogoID, int timeID);
+        Task<Response> Delete(int jogoID, int timeID);
         Task<DataResponse<JogoTime>> GetData();
     }
 }
