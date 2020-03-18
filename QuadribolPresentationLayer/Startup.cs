@@ -44,8 +44,6 @@ namespace QuadribolPresentationLayer
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<ITimeRepository, TimeRepository>();
             services.AddTransient<ITimeService, TimeService>();
-            services.AddTransient<ITimeCompetidorRepository, TimeCompetidorRepository>();
-            services.AddTransient<ITimeCompetidorService, TimeCompetidorService>();
             services.AddTransient<IJogoTimeRepository, JogoTimeRepository>();
             services.AddTransient<IJogoTimeService, JogoTimeService>();
         }

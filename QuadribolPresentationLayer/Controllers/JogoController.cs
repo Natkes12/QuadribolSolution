@@ -110,7 +110,7 @@ namespace QuadribolPresentationLayer.Controllers
             {
                 foreach (var item in jogoTime)
                 {
-                    await this._jogoTimeService.Insert(item);
+            //        await this._jogoTimeService.Insert(item);
                 }
                 return RedirectToAction("Index", "Jogo");
             }
