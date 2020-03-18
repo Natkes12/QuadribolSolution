@@ -8,7 +8,7 @@ namespace DAO.Interfaces
 {
     public interface IJogoTimeRepository
     {
-        Task<Response> Insert(JogoTime jogoTime);
+        Task<Response> Insert(int jogoID, int timeID);
         Task<DataResponse<JogoTime>> GetData();
     }
 }

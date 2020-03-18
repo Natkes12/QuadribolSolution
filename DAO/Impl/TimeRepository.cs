@@ -36,6 +36,23 @@ namespace DAO.Impl
             return time;
         }
 
+        public async Task<Time> GetByID(int id)
+        {
+            Time time = new Time();
+
+            try
+            {
+                time = await this._context.Times.FirstAsync(c => c.ID == id);
+            }
+            catch (Exception ex)
+            {
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+                throw new Exception("Erro no banco de dados.");
+            }
+
+            return time;
+        }
+
         public async Task<DataResponse<Time>> GetTimes()
         {
             DataResponse<Time> response = new DataResponse<Time>();

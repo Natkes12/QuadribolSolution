@@ -18,6 +18,24 @@ namespace DAO.Impl
             this._context = context;
         }
 
+        public async Task<Jogo> GetByID(int id)
+        {
+            Jogo jogo = new Jogo();
+
+            try
+            {
+                jogo = await this._context.Jogos.FirstAsync(c => c.ID == id);
+            }
+            catch (Exception ex)
+            {
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+                throw new Exception("Erro no banco de dados.");
+            }
+
+            return jogo;
+
+        }
+
         public async Task<DataResponse<Jogo>> GetJogos()
         {
             DataResponse<Jogo> response = new DataResponse<Jogo>();

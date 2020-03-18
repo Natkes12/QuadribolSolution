@@ -17,9 +17,14 @@ namespace Entity
         public virtual Narrador Narrador { get; set; }
         public int NarradorID { get; set; }
         public bool Encerrado { get; set; }
-        
+
         public ICollection<JogoTime> JogosTime { get; set; }
-    
+
+        public Jogo()
+        {
+            this.JogosTime = new List<JogoTime>();
+        }
+
     }
 
 }

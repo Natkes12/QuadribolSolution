@@ -12,5 +12,6 @@ namespace DAO.Interfaces
         Task<Response> Insert(Time time);
         Task<DataResponse<Time>> GetTimes();
         Task<Time> GetByCasa(Casa casa);
+        Task<Time> GetByID(int id);
     }
 }
