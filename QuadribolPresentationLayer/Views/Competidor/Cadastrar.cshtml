@@ -9,67 +9,73 @@
 
     <form method="post">
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Nome</label>
-                <div class="col-md-10">
-                    <input class="form-control" type="text" name="Nome" id="Nome" />
-                    <span class="text-danger" id="erroNome" name="erroNome"></span>
-                </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Nome</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text" name="Nome" id="Nome" />
+                <span class="text-danger" id="erroNome" name="erroNome"></span>
             </div>
+        </div>
 
-            @{
-                string[] casa = Enum.GetNames(typeof(Entity.Enums.Casa));
-            }
+        @{
+            string[] casa = Enum.GetNames(typeof(Entity.Enums.Casa));
+        }
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Casa</label>
-                <div class="col-md-10">
-                    <select class="form-control" name="Casa" id="Casa">
-                        @for (int i = 0; i < casa.Length; i++)
-                        {
-                            <option value="@i">@casa[i]</option>
-                        }
-                    </select>
-                </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Casa</label>
+            <div class="col-md-10">
+                <select class="form-control" name="Casa" id="Casa">
+                    @for (int i = 0; i < casa.Length; i++)
+                    {
+                        <option value="@i">@casa[i]</option>
+                    }
+                </select>
             </div>
+        </div>
 
-            @{
-                string[] escolaridade = Enum.GetNames(typeof(Entity.Enums.Escolaridade));
-            }
+        @{
+            string[] escolaridade = Enum.GetNames(typeof(Entity.Enums.Escolaridade));
+        }
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Escolaridade</label>
-                <div class="col-md-10">
-                    <select class="form-control" name="Escolaridade" id="Escolaridade">
-                        @for (int i = 0; i < escolaridade.Length; i++)
-                        {
-                            <option value="@i">@escolaridade[i]</option>
-                        }
-                    </select>
-                </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Escolaridade</label>
+            <div class="col-md-10">
+                <select class="form-control" name="Escolaridade" id="Escolaridade">
+                    @for (int i = 0; i < escolaridade.Length; i++)
+                    {
+                        <option value="@i">@escolaridade[i]</option>
+                    }
+                </select>
             </div>
+        </div>
 
-            @{
-                string[] funcao = Enum.GetNames(typeof(Entity.Enums.Funcao));
-            }
+        @{
+            string[] funcao = Enum.GetNames(typeof(Entity.Enums.Funcao));
+        }
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Função</label>
-                <div class="col-md-10">
-                    <select class="form-control" name="Funcao" id="Funcao">
-                        @for (int i = 0; i < funcao.Length; i++)
-                        {
-                            <option value="@i">@funcao[i]</option>
-                        }
-                    </select>
-                </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Função</label>
+            <div class="col-md-10">
+                <select class="form-control" name="Funcao" id="Funcao">
+                    @for (int i = 0; i < funcao.Length; i++)
+                    {
+                        <option value="@i">@funcao[i]</option>
+                    }
+                </select>
             </div>
+        </div>
 
-            <div class="form-group">
-                <div class="col-md-10">
-                    <input name="BotaoEnviar" id="BotaoEnviar" type="submit" value="Cadastrar" />
-                </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input name="BotaoEnviar" id="BotaoEnviar" type="submit" value="Cadastrar" />
             </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input name="BotaoUpdate" id="BotaoUpdate" type="submit" value="Update" />
+            </div>
+        </div>
 
     </form>
 </div>
@@ -105,6 +111,39 @@
                 }
 
                  if (!sucesso) {
+                    e.preventDefault();
+                }
+            });
+
+        });
+
+        $(document).ready(function () {
+
+            $("#BotaoUpdate").click(function (e) {
+
+                var nome = $("#Nome").val();
+                var escolaridade = $("#Escolaridade").val();
+
+                var sucesso = true;
+
+                if (nome == "") {
+                    $("#erroNome").html("O nome do usuário deve ser informado.");
+                    sucesso = false;
+                }
+                else if (nome.length < 2 || nome.length > 50) {
+                    $("#erroNome").html("O nome do usuário deve conter entre 2 e 50 caracteres.");
+                    sucesso = false;
+                }
+                else {
+                    $("#erroNome").html("");
+                }
+
+                if (escolaridade == "Primeiro" || escolaridade == "Segundo" || escolaridade == "Terceiro") {
+                    $("#erroEscolaridade").html("Para se inscrever como competidor o aluno deve estar cursando no mínimo o quarto ano.");
+                    sucesso = false;
+                }
+
+                if (!sucesso) {
                     e.preventDefault();
                 }
             });
