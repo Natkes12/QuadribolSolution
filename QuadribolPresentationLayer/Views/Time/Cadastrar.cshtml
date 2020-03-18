@@ -13,22 +13,75 @@
             string casa = "";
         }
 
+        @{
+            List<Entity.Competidor> competidores = ViewBag.Competidores;
+            Entity.Enums.Funcao funcao = Entity.Enums.Funcao.Apanhador;
+            int i2 = 1;
+        }
+
         <div class="form-group">
             <label class="control-label col-md-2">Casa do Time</label>
             <div class="col-md-10">
-                <input name="Casa" id="Casa" type="text" 
-                       @foreach (var item in ViewBag.Time)
-                       {
-                           if (item.Casa == ViewBag.Casa)
-                           {
-                               casa = Enum.GetName(typeof(Entity.Enums.Casa), item.Casa);
-                           }
-                       }
-                       value="@casa" readonly />
+                <input name="Casa" id="Casa" type="text"
+                    @foreach (var item in ViewBag.Time)
+                    {
+                        if (item.Casa == ViewBag.Casa)
+                        {
+                            casa = Enum.GetName(typeof(Entity.Enums.Casa), item.Casa);
+                        }
+                    }
+                    value="@casa" readonly />
             </div>
         </div>
 
-        @{ 
+        @for (int i = 0; i < 7; i++)
+        {
+            string nome;
+
+            if (i > 0)
+            {
+                if (competidores[i].Funcao != funcao)
+                {
+                    i2 = 1;
+                }
+            }
+
+            if (competidores[i].Funcao == Entity.Enums.Funcao.Apanhador || competidores[i].Funcao == Entity.Enums.Funcao.Goleiro)
+            {
+                nome = competidores[i].Funcao.ToString();
+            }
+            else
+            {
+                nome = competidores[i].Funcao.ToString() + " " + i2;
+            }
+
+            <div class="form-group">
+                <label class="control-label col-md-2">@nome</label>
+                <div class="col-md-10">
+                    <select class="form-control" name="viewModel" id="viewModel">
+                        @foreach (var item in competidores)
+                        {
+                            if (item.Casa == ViewBag.Casa)
+                            {
+                                if (item.Funcao == competidores[i].Funcao)
+                                {
+                                    <option value="@item.ID">@item.Nome</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            i2++;
+
+            funcao = competidores[i].Funcao;
+
+        }
+
+        @*
+
+        @{
             List<Entity.Competidor> competidores = ViewBag.Competidores;
         }
 
@@ -168,7 +221,7 @@
                 </div>
             </div>
 
-        }
+        }*@
 
         <div class="form-group">
             <div class="col-md-10">

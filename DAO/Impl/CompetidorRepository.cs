@@ -18,6 +18,23 @@ namespace DAO
             this._context = context;
         }
 
+        public async Task<Competidor> GetByID(int id)
+        {
+            Competidor competidor = new Competidor();
+
+            try
+            {
+                competidor = await _context.Competidores.FirstAsync(c => c.ID == id);
+            }
+            catch (Exception ex)
+            {
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+                throw new Exception("Erro no banco de dados.");
+            }
+
+            return competidor;
+        }
+
         public async Task<DataResponse<Competidor>> GetCompetidores()
         {
             DataResponse<Competidor> response = new DataResponse<Competidor>();
@@ -44,6 +61,27 @@ namespace DAO
             try
             {
                 this._context.Competidores.Add(competidor);
+                await this._context.SaveChangesAsync();
+                response.Sucesso = true;
+            }
+            catch (Exception ex)
+            {
+                response.Sucesso = false;
+                response.Erros.Add("Erro no banco de dados.");
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+            }
+
+            return response;
+        }
+
+        public async Task<Response> Update(Competidor competidor)
+        {
+            Response response = new Response();
+
+            try
+            {
+                Competidor competidorSelecionado = competidor;
+                this._context.Competidores.Update(competidorSelecionado);
                 await this._context.SaveChangesAsync();
                 response.Sucesso = true;
             }

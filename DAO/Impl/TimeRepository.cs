@@ -1,5 +1,6 @@
 ﻿using DAO.Interfaces;
 using Entity;
+using Entity.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,23 @@ namespace DAO.Impl
         public TimeRepository(QuadribolContext context)
         {
             this._context = context;
+        }
+
+        public async Task<Time> GetByCasa(Casa casa)
+        {
+            Time time = new Time();
+
+            try
+            {
+                time = await _context.Times.FirstAsync(c => c.Casa == casa);
+            }
+            catch (Exception ex)
+            {
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+                throw new Exception("Erro no banco de dados.");
+            }
+
+            return time;
         }
 
         public async Task<DataResponse<Time>> GetTimes()

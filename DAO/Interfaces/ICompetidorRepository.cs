@@ -10,5 +10,7 @@ namespace DAO.Interfaces
     {
         Task<Response> Insert(Competidor competidor);
         Task<DataResponse<Competidor>> GetCompetidores();
+        Task<Competidor> GetByID(int id);
+        Task<Response> Update(Competidor competidor);
     }
 }

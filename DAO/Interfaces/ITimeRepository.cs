@@ -1,4 +1,5 @@
 ﻿using Entity;
+using Entity.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,5 +11,6 @@ namespace DAO.Interfaces
     {
         Task<Response> Insert(Time time);
         Task<DataResponse<Time>> GetTimes();
+        Task<Time> GetByCasa(Casa casa);
     }
 }

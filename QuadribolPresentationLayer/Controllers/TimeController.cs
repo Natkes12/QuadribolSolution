@@ -99,7 +99,7 @@ namespace QuadribolPresentationLayer.Controllers
                 return RedirectToAction("Login", "Usuario");
             }
 
-            if (usuario.Permissao != Entity.Enums.Permissao.Administrador)
+            if (usuario.Permissao != Permissao.Administrador)
             {
                 return RedirectToAction("Index", "Jogo");
             }
@@ -124,46 +124,20 @@ namespace QuadribolPresentationLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Cadastrar(TimeInsertViewModel viewModel)
+        public async Task<IActionResult> Cadastrar(List<int> viewModel)
         {
-            List<Competidor> competidores = new List<Competidor>();
-            Competidor Artilheiro1 = new Competidor();
-            Artilheiro1.Nome = "Batata";
-            Artilheiro1.Casa = Casa.Grifinoria;
-            Artilheiro1.Escolaridade = Escolaridade.Sexto;
-            Artilheiro1.Funcao = Funcao.Artilheiro;
-            competidores.Add(Artilheiro1);
-            //competidores.Add(viewModel.Artilheiro2);
-            //competidores.Add(viewModel.Artilheiro3);
-            //competidores.Add(viewModel.Batedor1);
-            //competidores.Add(viewModel.Batedor2);
-            //competidores.Add(viewModel.Apanhador);
-            //competidores.Add(viewModel.Goleiro);
+            Competidor competidorTemp = new Competidor();
+            Time time = await this._timeRepository.GetByCasa(_casa);
 
-            Time time = new Time();
-            time.Competidores = competidores;
-            time.Casa = _casa;
-
-            //tempTimeCompetidor.Time = time;
-
-            //var configuration = new MapperConfiguration(cfg =>
-            //{
-            //    cfg.CreateMap<List<TimeCompetidorInsertViewModel>, List<TimeCompetidor>>();
-            //});
-            //IMapper mapper = configuration.CreateMapper();
-            //List<TimeCompetidor> timeCompetidor = mapper.Map<List<TimeCompetidor>>(viewModel);
-
-            try
+            foreach (var item in viewModel)
             {
-                await this._timeService.Insert(time);
-                return RedirectToAction("Index", "Time");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Errors = ex.Message;
-                return View();
+                competidorTemp = await _competidorRepository.GetByID(item);
+                competidorTemp.Time = time;
+                competidorTemp.TimeID = time.ID;
+                await this._competidorRepository.Update(competidorTemp);
             }
 
+            return RedirectToAction("Index", "Time");
 
         }
     }
