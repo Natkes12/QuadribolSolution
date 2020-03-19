@@ -17,13 +17,14 @@ namespace QuadribolPresentationLayer.Controllers
     {
 
         private IJogoService _jogoService;
+        private IJogoRepository _jogoRepository;
         private ITimeRepository _timeRepository;
         private INarradorRepository _narradorRepository;
         private IUsuarioService _usuarioService;
         private IJogoTimeRepository _jogoTimeRepository;
         private IJogoTimeService _jogoTimeService;
 
-        public JogoController(IJogoTimeService jogoTimeService, IJogoTimeRepository jogoTime, IJogoService jogo, ITimeRepository time, INarradorRepository narrador, IUsuarioService usuairo)
+        public JogoController(IJogoRepository jogoRepository, IJogoTimeService jogoTimeService, IJogoTimeRepository jogoTime, IJogoService jogo, ITimeRepository time, INarradorRepository narrador, IUsuarioService usuairo)
         {
             this._jogoService = jogo;
             this._timeRepository = time;
@@ -31,6 +32,7 @@ namespace QuadribolPresentationLayer.Controllers
             this._usuarioService = usuairo;
             this._jogoTimeRepository = jogoTime;
             this._jogoTimeService = jogoTimeService;
+            this._jogoRepository = jogoRepository;
         }
 
 
@@ -97,21 +99,24 @@ namespace QuadribolPresentationLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Cadastrar(List<JogoTimeInsertViewModel> viewModel)
+        public async Task<IActionResult> Cadastrar(JogoInsertViewModel viewModel, List<int> Times)
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<List<JogoTimeInsertViewModel>, List<JogoTime>>();
+                cfg.CreateMap<JogoInsertViewModel, Jogo>();
             });
             IMapper mapper = configuration.CreateMapper();
-            List<JogoTime> jogoTime = mapper.Map<List<JogoTime>>(viewModel);
+            Jogo jogo = mapper.Map<Jogo>(viewModel);
 
             try
             {
-                foreach (var item in jogoTime)
+                await this._jogoRepository.Insert(jogo);
+
+                foreach (var item in Times)
                 {
-            //        await this._jogoTimeService.Insert(item);
+                    await this._jogoTimeRepository.Insert(2, item);
                 }
+
                 return RedirectToAction("Index", "Jogo");
             }
             catch (Exception ex)
