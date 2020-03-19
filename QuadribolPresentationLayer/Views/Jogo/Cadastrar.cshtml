@@ -8,17 +8,16 @@
 <div class="form-horizontal">
 
     @{
-
-     }
+    }
 
     <form method="post">
         <div class="form-group">
             <label class="control-label col-md-2">Primeiro Time</label>
             <div class="col-md-10">
-                <select class="form-control" name="Time1" id="Time1">
+                <select class="form-control" name="Times" id="Times">
                     @foreach (var item in ViewBag.Times)
                     {
-                        <option value="@item.ID">@item.Nome</option>
+                        <option value="@item.ID">@item.Casa</option>
                     }
                 </select>
             </div>
@@ -27,10 +26,10 @@
         <div class="form-group">
             <label class="control-label col-md-2">Segundo Time</label>
             <div class="col-md-10">
-                <select class="form-control" name="Time2" id="Time2">
+                <select class="form-control" name="Times" id="Times">
                     @foreach (var item in ViewBag.Times)
                     {
-                        <option value="@item.ID">@item.Nome</option>
+                        <option value="@item.ID">@item.Casa</option>
                     }
                 </select>
             </div>
@@ -39,7 +38,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Data do Jogo</label>
             <div class="col-md-10">
-                <input class="form-control" type="date" name="DataJogo" id="DataJogo" />
+                <input class="form-control" type="date" name="viewModel.DataJogo" id="viewModel.DataJogo" />
                 <span class="text-danger" id="erroDataJogo" name="erroDataJogo"></span>
             </div>
         </div>
@@ -47,7 +46,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Narrador da Partida</label>
             <div class="col-md-10">
-                <select class="form-control" name="Narrador" id="Narrador">
+                <select class="form-control" name="viewModel.Narrador" id="viewModel.Narrador">
                     @foreach (var item in ViewBag.Narradores)
                     {
                         <option value="@item.ID">@item.Nome</option>
