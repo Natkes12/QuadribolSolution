@@ -6,6 +6,10 @@ for details on configuring this project to bundle and minify static web assets. 
     src: url('../fonts/magicschooltwo.ttf') format('truetype');
 }
 
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+}
+
 .navbar-light .navbar-brand {
     font-size: 60px;
 }
