@@ -59,7 +59,7 @@ namespace DAO.Impl
 
             try
             {
-                response.Data = _context.Jogos.ToListAsync();
+                response.Data = _context.Jogos.Include(c => c.JogosTime).ThenInclude(c => c.Time).ToListAsync();
                 response.Sucesso = true;
             }
             catch (Exception ex)
