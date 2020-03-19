@@ -29,6 +29,10 @@ namespace DAO.Impl
             }
             catch (Exception ex)
             {
+                if (ex.Message.Contains("Enumerator failed to MoveNextAsync."))
+                {
+                    return null;
+                }
                 File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
                 throw new Exception("Erro no banco de dados.");
             }

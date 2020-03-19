@@ -21,11 +21,6 @@ namespace Entity
 
         public ICollection<JogoTime> JogosTime { get; set; }
 
-        public Jogo()
-        {
-            this.JogosTime = new List<JogoTime>();
-        }
-
     }
 
 }
