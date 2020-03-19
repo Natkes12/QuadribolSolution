@@ -114,7 +114,7 @@ namespace QuadribolPresentationLayer.Controllers
 
                 foreach (var item in Times)
                 {
-                    await this._jogoTimeRepository.Insert(1, item);
+                    await this._jogoTimeRepository.Insert(2, item);
                 }
 
                 return RedirectToAction("Index", "Jogo");
