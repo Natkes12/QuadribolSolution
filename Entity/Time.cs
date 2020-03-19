@@ -13,10 +13,5 @@ namespace Entity
         public Casa Casa { get; set; }
         public ICollection<Competidor> Competidores { get; set; }
         public virtual ICollection<JogoTime> JogosTime { get; set; }
-
-        public Time()
-        {
-            this.JogosTime = new List<JogoTime>();
-        }
     }
 }

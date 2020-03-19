@@ -1,5 +1,6 @@
 ﻿using DAO.Interfaces;
 using Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,9 +22,36 @@ namespace DAO.Impl
             this._jogo = jogo;
         }
 
-        public Task<DataResponse<JogoTime>> GetData()
+        public async Task<DataResponse<JogoTime>> GetData()
         {
-            throw new NotImplementedException();
+            DataResponse<JogoTime> response = new DataResponse<JogoTime>();
+            List<Time> times = new List<Time>();
+            List<Jogo> jogos = new List<Jogo>();
+            JogoTime jogoTimeTemp = new JogoTime();
+
+            try
+            {
+                //times = await this._context.Times
+                //    .Include(c => c.Competidores)
+                //    .Include(c => c.JogosTime)
+                //    .ThenInclude(c => c.Jogo)
+                //    .ToListAsync();
+
+                jogos = await this._context.Jogos
+                    .Include(c => c.JogosTime)
+                    .ThenInclude(c => c.Time)
+                    .ToListAsync();
+
+                
+
+            }
+            catch (Exception ex)
+            {
+                
+            }
+
+            return response;
+
         }
 
         public async Task<Response> Insert(int jogoID, int timeID)
