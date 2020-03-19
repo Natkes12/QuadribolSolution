@@ -41,6 +41,15 @@ namespace QuadribolPresentationLayer.Controllers
             try
             {
                 DataResponse<Jogo> jogos = await _jogoService.GetJogos();
+                List<JogoTime> response = new List<JogoTime>();
+
+                foreach (var item in jogos.Data.Result)
+                {
+                    foreach (var item2 in item.JogosTime)
+                    {
+                        response.Add(item2);
+                    }
+                }
 
                 var configuration = new MapperConfiguration(cfg =>
                 {
@@ -49,7 +58,7 @@ namespace QuadribolPresentationLayer.Controllers
 
                 IMapper mapper = configuration.CreateMapper();
 
-                List<JogoQueryViewModel> dados = mapper.Map<List<JogoQueryViewModel>>(jogos.Data);
+                List<JogoQueryViewModel> dados = mapper.Map<List<JogoQueryViewModel>>(response);
 
                 return View(dados);
             }

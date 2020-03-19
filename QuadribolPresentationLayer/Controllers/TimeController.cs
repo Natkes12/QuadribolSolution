@@ -42,7 +42,7 @@ namespace QuadribolPresentationLayer.Controllers
                 });
 
                 IMapper mapper = configuration.CreateMapper();
-                List<TimeQueryViewModel> dados = mapper.Map<List<TimeQueryViewModel>>(times.Data);
+                List<TimeQueryViewModel> dados = mapper.Map<List<TimeQueryViewModel>>(times.Data.Result);
 
                 return View(dados);
             }
@@ -62,6 +62,8 @@ namespace QuadribolPresentationLayer.Controllers
         public async Task<IActionResult> FiltrarCasa(TimeInsertViewModel viewModel)
         {
             _casa = viewModel.Casa;
+
+            ViewBag.Errors = null;
 
             var configuration = new MapperConfiguration(cfg =>
             {

@@ -48,12 +48,12 @@ namespace BLL.Impl
             List<Jogo> jogo = new List<Jogo>();
             DataResponse<Jogo> response = new DataResponse<Jogo>();
 
-            if (jogo.Count <= 0)
-            {
-                response.Erros.Add("Nenhum competidor adicionado!");
-                response.Sucesso = false;
-                return response;
-            }
+            //if (jogo.Count <= 0)
+            //{
+            //    response.Erros.Add("Nenhum competidor adicionado!");
+            //    response.Sucesso = false;
+            //    return response;
+            //}
             try
             {
                 return await _jogoRepository.GetJogos();
