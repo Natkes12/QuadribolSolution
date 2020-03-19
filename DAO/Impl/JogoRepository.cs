@@ -36,6 +36,23 @@ namespace DAO.Impl
 
         }
 
+        public async Task<int> GetJogoID(Jogo jogo)
+        {
+            int jogoID = new int();
+
+            try
+            {
+                jogoID = this._context.Jogos.FirstAsync(c => c.DataJogo == jogo.DataJogo).Result.ID;
+            }
+            catch (Exception ex)
+            {
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+                throw new Exception("Erro no banco de dados.");
+            }
+
+            return jogoID;
+        }
+
         public async Task<DataResponse<Jogo>> GetJogos()
         {
             DataResponse<Jogo> response = new DataResponse<Jogo>();

@@ -11,5 +11,6 @@ namespace DAO.Interfaces
         Task<Response> Insert(Jogo jogo);
         Task<DataResponse<Jogo>> GetJogos();
         Task<Jogo> GetByID(int id);
+        Task<int> GetJogoID(Jogo jogo);
     }
 }

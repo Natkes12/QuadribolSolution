@@ -112,9 +112,11 @@ namespace QuadribolPresentationLayer.Controllers
             {
                 await this._jogoRepository.Insert(jogo);
 
+                int jogoID = await this._jogoRepository.GetJogoID(jogo);
+
                 foreach (var item in Times)
                 {
-                    await this._jogoTimeRepository.Insert(2, item);
+                    await this._jogoTimeRepository.Insert(jogoID, item);
                 }
 
                 return RedirectToAction("Index", "Jogo");
