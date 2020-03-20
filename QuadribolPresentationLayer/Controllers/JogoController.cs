@@ -53,7 +53,7 @@ namespace QuadribolPresentationLayer.Controllers
 
                 var configuration = new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<Jogo, JogoQueryViewModel>();
+                    cfg.CreateMap<JogoTime, JogoQueryViewModel>();
                 });
 
                 IMapper mapper = configuration.CreateMapper();
@@ -62,7 +62,7 @@ namespace QuadribolPresentationLayer.Controllers
 
                 return View(dados);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return View();
             }
