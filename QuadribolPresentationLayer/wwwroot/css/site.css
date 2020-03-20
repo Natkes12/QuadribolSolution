@@ -98,17 +98,20 @@ body {
     font-family: 'magicschooltwo';
     background-image: url("/images/fundo5.jpg");
     background-repeat: no-repeat;
-    line-height : 25px;
+    line-height: 25px;
     background-attachment: fixed;
     background-size: cover;
+    height: 1400px;
 }
 
 .footer {
     font-size: 25px;
     position: absolute;
     bottom: 0;
+    height:140px;
     width: 100%;
     white-space: nowrap;
+    background-color: white;
     color: black;
     line-height: 65px; /* Vertically center the text there */
 }
