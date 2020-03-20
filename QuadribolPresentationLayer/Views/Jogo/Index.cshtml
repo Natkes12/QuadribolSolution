@@ -11,17 +11,14 @@
         <th>Data do Jogo</th>
         <th>Pontuação</th>
         <th>Narrador</th>
-        <th>Data de Nascimento</th>
     </tr>
 
     @foreach (var item in Model)
     {
 <tr>
     <td>@item.Jogo.DataJogo</td>
-    <td>@item.Jogo.PontuacaoTime1</td>
-    <td>@item.Jogo.PontuacaoTime2</td>
+    <td>@item.Jogo.PontuacaoTime1 X @item.Jogo.PontuacaoTime2</td>
     <td>@item.Jogo.Narrador.Nome</td>
-    <td>@item.Time.Casa</td>
 </tr>
     }
 

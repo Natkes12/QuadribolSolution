@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,7 +60,7 @@ namespace DAO.Impl
 
             try
             {
-                response.Data = _context.Jogos.Include(c => c.JogosTime).ThenInclude(c => c.Time).ToListAsync();
+                response.Data = _context.Jogos.Include(c => c.JogosTime).ThenInclude(a => a.Time).Include(c => c.Narrador).ToListAsync();
                 response.Sucesso = true;
             }
             catch (Exception ex)

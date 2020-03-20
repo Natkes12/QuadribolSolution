@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BLL.Interfaces;
 using Entity;
+using Entity.Enums;
 using Microsoft.AspNetCore.Mvc;
 using QuadribolPresentationLayer.Models.Insert;
 using QuadribolPresentationLayer.Models.Query;
 
 namespace QuadribolPresentationLayer.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController : UsuarioBaseController
     {
 
         private IUsuarioService _usuarioService;
@@ -23,23 +24,6 @@ namespace QuadribolPresentationLayer.Controllers
 
         public async Task<IActionResult> Index()
         {
-            Usuario usuario = new Usuario();
-
-            try
-            {
-                int usuarioId = Convert.ToInt32(Request.Cookies["USERIDENTITY"].ToString());
-                usuario = await _usuarioService.GetUsuario(usuarioId);
-            }
-            catch (NullReferenceException ex)
-            {
-                return RedirectToAction("Login", "Usuario");
-            }
-
-            if (usuario.Permissao != Entity.Enums.Permissao.Administrador)
-            {
-                return RedirectToAction("Index", "Jogo");
-            }
-
             try
             {
                 DataResponse<Usuario> usuarios = await _usuarioService.GetUsuarios();
@@ -72,16 +56,18 @@ namespace QuadribolPresentationLayer.Controllers
             try
             {
                 Usuario usuario = await _usuarioService.Autenticar(email, senha);
-                Response.Cookies.Append("USERIDENTITY", usuario.ID.ToString());
-                //var X = Request.Cookies["USERIDENTITY"].ToString();
-                if (usuario.Permissao == Entity.Enums.Permissao.Administrador)
+
+                if (usuario.Permissao == Permissao.Administrador)
                 {
-                    return RedirectToAction("Cadastrar", "Jogo");
+                    Response.Cookies.Append("USERIDENTITY", usuario.ID.ToString()+"ADMIN");
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Jogo");
+                    Response.Cookies.Append("USERIDENTITY", usuario.ID.ToString());
                 }
+
+                return RedirectToAction("Index", "Jogo");
+
             }
             catch (Exception ex)
             {
@@ -92,23 +78,6 @@ namespace QuadribolPresentationLayer.Controllers
 
         public async Task<IActionResult> Cadastrar()
         {
-            //Usuario usuario = new Usuario();
-
-            //try
-            //{
-            //    int usuarioId = Convert.ToInt32(Request.Cookies["USERIDENTITY"].ToString());
-            //    usuario = await _usuarioService.GetUsuario(usuarioId);
-            //}
-            //catch (NullReferenceException)
-            //{
-            //    return RedirectToAction("Login", "Usuario");
-            //}
-
-            //if (usuario.Permissao != Entity.Enums.Permissao.Administrador)
-            //{
-            //    return RedirectToAction("Index", "Jogo");
-            //}
-
             return View();
         }
 

@@ -13,7 +13,7 @@ using QuadribolPresentationLayer.Models.Query;
 
 namespace QuadribolPresentationLayer.Controllers
 {
-    public class TimeController : Controller
+    public class TimeController : ValidaAcessoController
     {
         private ITimeService _timeService;
         private ICompetidorRepository _competidorRepository;
@@ -31,7 +31,6 @@ namespace QuadribolPresentationLayer.Controllers
 
         public async Task<IActionResult> Index()
         {
-
             try
             {
                 DataResponse<Time> times = await _timeRepository.GetTimes();
