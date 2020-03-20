@@ -20,12 +20,26 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: auto;
     margin-left: auto;
     color: black;
+    height: 20px;
+}
+
+.pomo{
+    height: 300px;
+}
+
+img{
+    height: 100px;
+}
+
+.container2{
+    height:1000px;
+
 }
 
 header{
     color: black;
     font-size: 40px;
-    background-color: lightskyblue;
+    height: 80px;
 }
 
 indexCronograma {
@@ -77,6 +91,7 @@ html {
 
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  height: 90px;
 }
 
 button.accept-policy {
@@ -93,6 +108,7 @@ html {
 
 body {
     /* Margin bottom by footer height */
+    height: 1550px;
     color: black;
     background-color: lightskyblue;
     font-family: 'magicschooltwo';
@@ -101,18 +117,40 @@ body {
     line-height: 25px;
     background-attachment: fixed;
     background-size: cover;
-    height: 1400px;
 }
 
 .footer {
-    font-size: 25px;
-    position: absolute;
-    bottom: 0;
-    height:140px;
-    width: 100%;
-    white-space: nowrap;
     background-color: white;
+    color: #000;
+    position: relative;
+    width: 800px;
+    font-size: 25px;
+    text-align: center;
+    bottom: 0;
+    white-space: nowrap;
     color: black;
     line-height: 65px; /* Vertically center the text there */
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: auto;
+    margin-top: 1200px;
+    border-top: 2px solid #1861ac;
+    border-right: 2px solid #1861ac;
+    border-left: 2px solid #1861ac;
 }
 
+font-size: 18px;
+color: #000;
+position: relative;
+width: 1000px;
+height: 400px;
+margin-right: auto;
+margin-left: auto;
+margin-top: 30px;
+text-align: center;
+padding-top: 5px;
+background-color: #E7E7E8;
+
+border-top: 2px solid #FEBE14;
+border-right: 2px solid #FEBE14;
+border-left: 2px solid #FEBE14; 
