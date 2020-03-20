@@ -11,7 +11,7 @@ using QuadribolPresentationLayer.Models.Query;
 
 namespace QuadribolPresentationLayer.Controllers
 {
-    public class NarradorController : Controller
+    public class NarradorController : ValidaAcessoController
     {
 
         private INarradorService _narradorService;
@@ -48,23 +48,6 @@ namespace QuadribolPresentationLayer.Controllers
 
         public async Task<IActionResult> Cadastrar()
         {
-            Usuario usuario = new Usuario();
-
-            try
-            {
-                int usuarioId = Convert.ToInt32(Request.Cookies["USERIDENTITY"].ToString());
-                usuario = await _usuarioService.GetUsuario(usuarioId);
-            }
-            catch (NullReferenceException)
-            {
-                return RedirectToAction("Login", "Usuario");
-            }
-
-            if (usuario.Permissao != Entity.Enums.Permissao.Administrador)
-            {
-                return RedirectToAction("Index", "Jogo");
-            }
-
             return View();
         }
 
