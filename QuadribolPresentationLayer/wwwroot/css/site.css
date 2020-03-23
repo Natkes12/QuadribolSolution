@@ -91,7 +91,7 @@ html {
 
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-  height: 90px;
+  height: 100px;
 }
 
 button.accept-policy {
@@ -124,7 +124,8 @@ body {
     color: #000;
     position: relative;
     width: 800px;
-    font-size: 25px;
+    height: 480px;
+    font-size: 22px;
     text-align: center;
     bottom: 0;
     white-space: nowrap;
