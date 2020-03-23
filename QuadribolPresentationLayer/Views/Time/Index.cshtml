@@ -9,19 +9,38 @@
 <table class="table">
     <tr>
         <th>Casa</th>
-        <th>Competidores</th>
+        <th><center>Competidores</center></th>
     </tr>
 
     @{
         foreach (var item in Model)
         {
-        <tr>
-            <td>@item.Casa</td>
-            @foreach (var item2 in item.Competidores)
+
+            List<string> vs = new List<string>();
+
+            foreach (var item2 in item.Competidores)
             {
-                <td>@item2.Nome - @item2.Funcao</td>
+                if (item2.Casa == item.Casa)
+                {
+                    vs.Add(item2.Nome + " - " + item2.Funcao + "(a)");
+                }
             }
-        </tr>
+
+            <tr>
+                <td>@item.Casa</td>
+                <td>
+                    @foreach (var item2 in vs)
+                    {
+                    <center>@item2
+                        @if (vs.Last() != item2)
+                        {
+                            <br /><br />
+                        }
+                    </center>
+                    }
+                </td>
+            </tr>
+
         }
     }
 

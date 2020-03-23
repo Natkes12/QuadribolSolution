@@ -38,11 +38,6 @@ namespace BLL
                 response.Erros.Add("Para se inscrever como competidor o aluno deve estar cursando no mínimo o quarto ano.");
             }
 
-            if (competidor.Casa != competidor.Time.Casa)
-            {
-                response.Erros.Add("A casa do competidor é diferente da casa do time!");
-            }
-
             if (response.Erros.Count > 0)
             {
                 response.Sucesso = false;
