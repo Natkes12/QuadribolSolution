@@ -13,13 +13,22 @@
         <th>Narrador</th>
     </tr>
 
+    @{
+        int jogoID = 0;
+    }
+
     @foreach (var item in Model)
     {
-<tr>
-    <td>@item.Jogo.DataJogo</td>
-    <td>@item.Jogo.PontuacaoTime1 X @item.Jogo.PontuacaoTime2</td>
-    <td>@item.Jogo.Narrador.Nome</td>
-</tr>
+        if (item.Jogo.ID != jogoID)
+        {
+            <tr>
+                <td>@item.Jogo.DataJogo</td>
+                <td><img src="@Model[0].Time.CaminhoImagem" /> @item.Jogo.PontuacaoTime1 X @item.Jogo.PontuacaoTime2 <img src="@Model[1].Time.CaminhoImagem" /></td>
+                <td>@item.Jogo.Narrador.Nome</td>
+            </tr>
+
+            jogoID = item.Jogo.ID;
+        }
     }
 
 </table>

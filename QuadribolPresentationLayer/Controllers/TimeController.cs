@@ -62,6 +62,24 @@ namespace QuadribolPresentationLayer.Controllers
         {
             _casa = viewModel.Casa;
 
+            switch (viewModel.Casa)
+            {
+                case Casa.Grifinoria:
+                    viewModel.CaminhoImagem = "https://img.elo7.com.br/product/original/2A97806/patch-bordado-brasao-grifinoria-harry-potter-modelo2.jpg";
+                    break;
+                case Casa.Sonserina:
+                    viewModel.CaminhoImagem = "https://img.elo7.com.br/product/original/2A977DE/patch-bordado-brasao-sonserina-harry-potter-modelo2.jpg";
+                    break;
+                case Casa.Corvinal:
+                    viewModel.CaminhoImagem = "https://img.elo7.com.br/product/zoom/2A977D3/patch-bordado-brasao-corvinal-harry-potter-modelo2.jpg";
+                    break;
+                case Casa.Lufa_Lufa:
+                    viewModel.CaminhoImagem = "https://img.elo7.com.br/product/original/2A977F7/patch-bordado-brasao-lufa-lufa-harry-potter-modelo2.jpg";
+                    break;
+                default:
+                    break;
+            }
+
             ViewBag.Errors = null;
 
             var configuration = new MapperConfiguration(cfg =>
@@ -75,8 +93,15 @@ namespace QuadribolPresentationLayer.Controllers
 
             if (timeTemp != null)
             {
-                ViewBag.Errors = "O time não pode ser criado pois já existe um time com a mesma casa.";
-                return View();
+                List<Competidor> competidores = await this._competidorRepository.GetCompetidores().Result.Data;
+                foreach (var item in competidores)
+                {
+                    if (item.Casa == timeTemp.Casa)
+                    {
+                        await this._competidorRepository.DesalocarTime(item);
+                    }
+                }
+                return RedirectToAction("Cadastrar", "Time");
             }
 
             try
@@ -94,23 +119,6 @@ namespace QuadribolPresentationLayer.Controllers
 
         public async Task<IActionResult> Cadastrar()
         {
-            Usuario usuario = new Usuario();
-
-            try
-            {
-                int usuarioId = Convert.ToInt32(Request.Cookies["USERIDENTITY"].ToString());
-                usuario = await _usuarioService.GetUsuario(usuarioId);
-            }
-            catch (NullReferenceException)
-            {
-                return RedirectToAction("Login", "Usuario");
-            }
-
-            if (usuario.Permissao != Permissao.Administrador)
-            {
-                return RedirectToAction("Index", "Jogo");
-            }
-
             List<Competidor> competidores = await _competidorRepository.GetCompetidores().Result.Data;
             List<Time> times = await _timeRepository.GetTimes().Result.Data;
 

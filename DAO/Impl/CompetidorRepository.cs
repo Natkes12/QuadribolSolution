@@ -18,6 +18,29 @@ namespace DAO
             this._context = context;
         }
 
+        public async Task<Response> DesalocarTime(Competidor competidor)
+        {
+            Response response = new Response();
+
+            competidor.Time = null;
+            competidor.TimeID = null;
+
+            try
+            {
+                this._context.Competidores.Update(competidor);
+                await this._context.SaveChangesAsync();
+                response.Sucesso = true;
+            }
+            catch (Exception ex)
+            {
+                response.Sucesso = false;
+                response.Erros.Add("Erro no banco de dados.");
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+            }
+
+            return response;
+        }
+
         public async Task<Competidor> GetByID(int id)
         {
             Competidor competidor = new Competidor();

@@ -13,9 +13,9 @@ namespace QuadribolPresentationLayer.Controllers
         {
             var cookie = this.Request.Cookies["USERIDENTITY"];
 
-            _url = filterContext.HttpContext.Request.Path;
+            string url = filterContext.HttpContext.Request.Path;
 
-            if (cookie != null)
+            if (cookie != null && url.ToUpper().Contains("Index"))
             {
                 if (!cookie.Contains("ADMIN"))
                 {

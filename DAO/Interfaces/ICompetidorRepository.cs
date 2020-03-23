@@ -9,6 +9,7 @@ namespace DAO.Interfaces
     public interface ICompetidorRepository
     {
         Task<Response> Insert(Competidor competidor);
+        Task<Response> DesalocarTime(Competidor competidor);
         Task<DataResponse<Competidor>> GetCompetidores();
         Task<Competidor> GetByID(int id);
         Task<Response> Update(Competidor competidor);
