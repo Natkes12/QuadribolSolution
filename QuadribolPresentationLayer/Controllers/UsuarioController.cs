@@ -66,7 +66,7 @@ namespace QuadribolPresentationLayer.Controllers
                     Response.Cookies.Append("USERIDENTITY", usuario.ID.ToString());
                 }
 
-                return RedirectToAction("Index", "Jogo");
+                return Redirect(_url);
 
             }
             catch (Exception ex)
@@ -102,6 +102,13 @@ namespace QuadribolPresentationLayer.Controllers
             }
 
             return View();
+        }
+
+        public async Task<IActionResult> Sair()
+        {
+            Response.Cookies.Delete("USERIDENTITY");
+
+            return RedirectToAction("Login", "Usuario");
         }
     }
 }
