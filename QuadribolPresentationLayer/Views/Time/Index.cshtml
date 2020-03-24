@@ -28,15 +28,14 @@
 
             <tr>
                 <td>@item.Casa</td>
-                <td>
+                <td style="text-align:center">
                     @foreach (var item2 in vs)
                     {
-                    <center>@item2
+                    @item2
                         @if (vs.Last() != item2)
                         {
                             <br /><br />
                         }
-                    </center>
                     }
                 </td>
             </tr>

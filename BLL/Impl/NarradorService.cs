@@ -55,15 +55,6 @@ namespace BLL.Impl
 
         public async Task<DataResponse<Narrador>> GetNarrador()
         {
-            List<Narrador> narrador = new List<Narrador>();
-            DataResponse<Narrador> response = new DataResponse<Narrador>();
-
-            if (narrador.Count <= 0)
-            {
-                response.Erros.Add("Nenhum narrador adicionado!");
-                response.Sucesso = false;
-                return response;
-            }
             try
             {
                 return await _narradorRepository.GetNarradores();
