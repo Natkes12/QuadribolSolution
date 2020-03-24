@@ -61,7 +61,6 @@ namespace BLL.Impl
             }
             catch (Exception ex)
             {
-                response.Sucesso = false;
                 File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
                 throw new Exception("Erro no banco de dados, contate o administrador");
             }
