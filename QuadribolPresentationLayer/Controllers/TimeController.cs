@@ -65,16 +65,16 @@ namespace QuadribolPresentationLayer.Controllers
             switch (viewModel.Casa)
             {
                 case Casa.Grifinoria:
-                    viewModel.CaminhoImagem = "https://img.elo7.com.br/product/original/2A97806/patch-bordado-brasao-grifinoria-harry-potter-modelo2.jpg";
+                    viewModel.CaminhoImagem = "https://hogwartshabbolima.weebly.com/uploads/7/6/1/6/7616315/1172733.gif?285";
                     break;
                 case Casa.Sonserina:
-                    viewModel.CaminhoImagem = "https://img.elo7.com.br/product/original/2A977DE/patch-bordado-brasao-sonserina-harry-potter-modelo2.jpg";
+                    viewModel.CaminhoImagem = "https://hogwartshabbolima.weebly.com/uploads/7/6/1/6/7616315/449533.gif?191";
                     break;
                 case Casa.Corvinal:
-                    viewModel.CaminhoImagem = "https://img.elo7.com.br/product/zoom/2A977D3/patch-bordado-brasao-corvinal-harry-potter-modelo2.jpg";
+                    viewModel.CaminhoImagem = "https://hogwartshabbolima.weebly.com/uploads/7/6/1/6/7616315/851969.gif?236";
                     break;
                 case Casa.Lufa_Lufa:
-                    viewModel.CaminhoImagem = "https://img.elo7.com.br/product/original/2A977F7/patch-bordado-brasao-lufa-lufa-harry-potter-modelo2.jpg";
+                    viewModel.CaminhoImagem = "https://hogwartshabbolima.weebly.com/uploads/7/6/1/6/7616315/1316317.gif?239";
                     break;
                 default:
                     break;
