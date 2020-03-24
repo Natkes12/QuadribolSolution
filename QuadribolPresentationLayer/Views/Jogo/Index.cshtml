@@ -6,11 +6,18 @@
 
 <h2>Jogos</h2>
 
+<style>
+    .img {
+        width: 50px;
+        height: 50px;
+    }
+</style>
+
 <table class="table">
     <tr>
-        <th>Data do Jogo</th>
-        <th><center>Pontuação</center></th>
-        <th>Narrador</th>
+        <th style="text-align:center">Data do Jogo</th>
+        <th style="text-align:center">Pontuação</th>
+        <th style="text-align:center">Narrador</th>
     </tr>
 
     @{
@@ -22,9 +29,9 @@
         if (item.Jogo.ID != jogoID)
         {
             <tr>
-                <td>@item.Jogo.DataJogo.ToString("dd/MM/yyyy - hh:mm")</td>
-                <td><center><img width="50" height="50" src="@Model[0].Time.CaminhoImagem" /> @item.Jogo.PontuacaoTime1 X @item.Jogo.PontuacaoTime2 <img width="50" height="50" src="@Model[1].Time.CaminhoImagem" /></center></td>
-                <td>@item.Jogo.Narrador.Nome</td>
+                <td style="text-align:center">@item.Jogo.DataJogo.ToString("dd/MM/yyyy - hh:mm")</td>
+                <td style="text-align:center"><img width="50" height="50" src="@Model[0].Time.CaminhoImagem" /> @item.Jogo.PontuacaoTime1 X @item.Jogo.PontuacaoTime2 <img width="50" height="50" src="@Model[1].Time.CaminhoImagem" /></td>
+                <td style="text-align:center">@item.Jogo.Narrador.Nome</td>
             </tr>
 
             jogoID = item.Jogo.ID;
