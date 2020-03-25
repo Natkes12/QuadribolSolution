@@ -9,10 +9,10 @@ namespace BLL.Interfaces
     public interface IUsuarioService
     {
         Task<Response> Insert(Usuario usuario);
-        Task<Response> Update(Usuario usuario);
-        Task<Response> Delete(Usuario usuario);
         Task<Usuario> Autenticar(string email, string senha);
         Task<Usuario> GetUsuario(int id);
         Task<DataResponse<Usuario>> GetUsuarios();
+        Task<Response> Update(Usuario usuario);
+        Task<Response> Delete(Usuario usuario);
     }
 }

@@ -13,11 +13,25 @@ namespace QuadribolPresentationLayer.Controllers
         {
             var cookie = this.Request.Cookies["USERIDENTITY"];
 
-            string url = filterContext.HttpContext.Request.Path;
+            string url = filterContext.HttpContext.Request.Path.ToString().ToUpper();
 
-            if (cookie != null && url.ToUpper().Contains("Index"))
+            if (!url.Contains("LOGIN") && !url.Contains("CADASTRAR"))
             {
-                if (!cookie.Contains("ADMIN"))
+                if (cookie != null)
+                {
+                    if (!cookie.Contains("ADMIN") && !url.Contains("SAIR"))
+                    {
+                        filterContext.Result = new RedirectResult(Url.Action("Index", "Jogo"));
+                    }
+                }
+                else
+                {
+                    filterContext.Result = new RedirectResult(Url.Action("Login", "Usuario"));
+                }
+            }
+            else if (url.Contains("LOGIN"))
+            {
+                if (cookie != null)
                 {
                     filterContext.Result = new RedirectResult(Url.Action("Index", "Jogo"));
                 }

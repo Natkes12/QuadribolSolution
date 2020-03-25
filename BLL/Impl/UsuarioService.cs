@@ -28,11 +28,6 @@ namespace BLL.Impl
             {
                 usuario = await _usuarioRepository.Autenticar(email, senha);
 
-                if (usuario == null)
-                {
-                    throw new Exception("Email e/ou senha inválidos");
-                }
-
                 response.Sucesso = true;
             }
             catch (Exception ex)
@@ -41,16 +36,27 @@ namespace BLL.Impl
                 response.Sucesso = false;
                 File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
                 throw new Exception("Erro no banco de dados, contate o administrador.");
-                
             }
 
             return usuario;
 
         }
 
-        public Task<Response> Delete(Usuario usuario)
+        public async Task<Response> Delete(Usuario usuario)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+
+            try
+            {
+                return await this._usuarioRepository.Delete(usuario);
+            }
+            catch (Exception ex)
+            {
+                response.Erros.Add("Erro no banco de dados, contate o administrador.");
+                response.Sucesso = false;
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+                return response;
+            }
         }
 
         public async Task<Usuario> GetUsuario(int id)
@@ -136,9 +142,21 @@ namespace BLL.Impl
             }
         }
 
-        public Task<Response> Update(Usuario usuario)
+        public async Task<Response> Update(Usuario usuario)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+
+            try
+            {
+                return await this._usuarioRepository.Update(usuario);
+            }
+            catch(Exception ex)
+            {
+                response.Erros.Add("Erro no banco de dados, contate o administrador.");
+                response.Sucesso = false;
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+                return response;
+            }
         }
     }
 }

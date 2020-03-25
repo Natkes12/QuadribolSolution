@@ -57,6 +57,16 @@ namespace QuadribolPresentationLayer.Controllers
             {
                 Usuario usuario = await _usuarioService.Autenticar(email, senha);
 
+                if (usuario == null)
+                {
+                    ViewBag.InvalidLogin = "Email e/ou Senha inválido(s).";
+                    return View();
+                }
+                else
+                {
+                    ViewBag.InvalidLogin = "";
+                }
+
                 if (usuario.Permissao == Permissao.Administrador)
                 {
                     Response.Cookies.Append("USERIDENTITY", usuario.ID.ToString()+"ADMIN");
@@ -91,10 +101,84 @@ namespace QuadribolPresentationLayer.Controllers
             IMapper mapper = configuration.CreateMapper();
             Usuario usuario = mapper.Map<Usuario>(viewModel);
 
+            usuario.EhAtivo = true;
+            usuario.Permissao = Permissao.Normal;
+
             try
             {
                 await this._usuarioService.Insert(usuario);
                 return RedirectToAction("Login", "Usuario");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Errors = ex.Message;
+            }
+
+            return View();
+        }
+
+        public async Task<IActionResult> AlterarUsuario()
+        {
+            List<Usuario> usuarios = await this._usuarioService.GetUsuarios().Result.Data;
+
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Usuario, UsuarioQueryViewModel>();
+            });
+            IMapper mapper = configuration.CreateMapper();
+            List<UsuarioQueryViewModel> dados = mapper.Map<List<UsuarioQueryViewModel>>(usuarios);
+
+            ViewBag.Usuarios = dados;
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AlterarUsuario(int usuarioID, UsuarioInsertViewModel viewModel)
+        {
+            Usuario usuario = await this._usuarioService.GetUsuario(usuarioID);
+
+            usuario.Permissao = viewModel.Permissao;
+
+            try
+            {
+                await this._usuarioService.Update(usuario);
+                return RedirectToAction("Index", "Usuario");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Errors = ex.Message;
+            }
+
+            return View();
+
+        }
+
+        public async Task<IActionResult> DeletarUsuario()
+        {
+            List<Usuario> usuarios = await this._usuarioService.GetUsuarios().Result.Data;
+
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Usuario, UsuarioQueryViewModel>();
+            });
+            IMapper mapper = configuration.CreateMapper();
+            List<UsuarioQueryViewModel> dados = mapper.Map<List<UsuarioQueryViewModel>>(usuarios);
+
+            ViewBag.Usuarios = dados;
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletarUsuario(int usuarioID)
+        {
+            Usuario usuario = await this._usuarioService.GetUsuario(usuarioID);
+
+            try
+            {
+                await this._usuarioService.Delete(usuario);
+                return RedirectToAction("Index", "Usuario");
             }
             catch (Exception ex)
             {

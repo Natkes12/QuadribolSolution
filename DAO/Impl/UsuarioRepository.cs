@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,11 +22,38 @@ namespace DAO
         {
             Response response = new Response();
             Usuario user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email && u.Senha == senha);
+
             if (user == null)
             {
-                throw new Exception("Email e/ou senha inválidos");
+                return null;
             }
+            //else if (user.EhAtivo == false)
+            //{
+            //    return null;
+            //}
             return user;
+        }
+
+        public async Task<Response> Delete(Usuario usuario)
+        {
+            Response response = new Response();
+
+            usuario.EhAtivo = false;
+
+            try
+            {
+                this._context.Usuarios.Update(usuario);
+                await this._context.SaveChangesAsync();
+                response.Sucesso = true;
+            }
+            catch (Exception ex)
+            {
+                response.Sucesso = false;
+                response.Erros.Add("Erro no banco de dados.");
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
+            }
+
+            return response;
         }
 
         public async Task<Usuario> GetUsuario(int id)
@@ -78,6 +106,26 @@ namespace DAO
                     response.Erros.Add("Erro no banco de dados.");
                 }
                 response.Sucesso = false;
+            }
+
+            return response;
+        }
+
+        public async Task<Response> Update(Usuario usuario)
+        {
+            Response response = new Response();
+
+            try
+            {
+                this._context.Usuarios.Update(usuario);
+                await this._context.SaveChangesAsync();
+                response.Sucesso = true;
+            }
+            catch (Exception ex)
+            {
+                response.Sucesso = false;
+                response.Erros.Add("Erro no banco de dados.");
+                File.WriteAllText("log.txt", ex.Message + " - " + ex.StackTrace);
             }
 
             return response;

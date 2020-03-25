@@ -23,7 +23,7 @@ namespace QuadribolPresentationLayer.Controllers
             {
                 if (!cookie.Contains("ADMIN"))
                 {
-                    if (_url.ToUpper().Contains("CADASTRAR"))
+                    if (_url.ToUpper().Contains("CADASTRAR") || _url.ToUpper().Contains("FILTRARCASA"))
                     {
                         filterContext.Result = new RedirectResult(Url.Action("Index", "Jogo"));
                     }

@@ -131,6 +131,11 @@ namespace QuadribolPresentationLayer.Controllers
             List<TimeQueryViewModel> dadosTimes = mapper.Map<List<TimeQueryViewModel>>(times);
             List<CompetidorQueryViewModel> dadosCompetidores = mapper.Map<List<CompetidorQueryViewModel>>(competidores);
 
+            if (competidores.Count < 7)
+            {
+                return RedirectToAction("Cadastrar", "Competidor");
+            }
+
             ViewBag.Competidores = competidores;
             ViewBag.Time = dadosTimes;
             ViewBag.Casa = _casa;

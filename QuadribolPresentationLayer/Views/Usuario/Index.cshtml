@@ -6,41 +6,52 @@
 
 <h2>Index</h2>
 
-<table class="table">
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Email</th>
-        <th>Senha</th>
-        <th>Permissão</th>
-        <th>Ativo</th>
-    </tr>
-
-    @{
-        string EhAtivo = "";
+<style>
+    img {
+        height: 25px;
+        width: 20px;
     }
+</style>
 
-    @foreach (var item in Model)
-    {
-
-        @if (item.EhAtivo)
-        {
-            EhAtivo = "Sim";
-        }
-        else
-        {
-            EhAtivo = "Não";
-        }
-
+    <table class="table">
         <tr>
-            <td>@item.ID</td>
-            <td>@item.Nome</td>
-            <td>@item.Email</td>
-            <td>@item.Senha</td>
-            <td>@item.Permissao.ToString()</td>
-            <td>@EhAtivo</td>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Permissão</th>
+            <th>Ativo</th>
         </tr>
-    }
 
-</table>
+        @{
+            string EhAtivo = "";
+        }
 
+        @foreach (var item in Model)
+        {
+
+
+            @if (item.EhAtivo)
+            {
+                EhAtivo = "Sim";
+            }
+            else
+            {
+                EhAtivo = "Não";
+            }
+
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.Nome</td>
+                <td>@item.Email</td>
+                <td>@item.Permissao.ToString()</td>
+                <td>@EhAtivo</td>
+                <td style="border:none">
+                    <a href="Usuario/AlterarUsuario"><img src="~/images/icons/pencil-edit-button.png" /></a>
+                </td>
+                <td style="border:none">
+                    <a href="Usuario/DeletarUsuario"><img src="~/images/icons/Trash_Delete_Button.png" /></a>
+                </td>
+            </tr>
+        }
+
+    </table>
