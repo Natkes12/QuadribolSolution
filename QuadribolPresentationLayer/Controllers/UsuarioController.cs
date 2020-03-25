@@ -35,7 +35,7 @@ namespace QuadribolPresentationLayer.Controllers
 
                 IMapper mapper = configuration.CreateMapper();
 
-                List<UsuarioQueryViewModel> dados = mapper.Map<List<UsuarioQueryViewModel>>(usuarios.Data);
+                List<UsuarioQueryViewModel> dados = mapper.Map<List<UsuarioQueryViewModel>>(usuarios.Data.Result);
 
                 return View(dados);
             }
