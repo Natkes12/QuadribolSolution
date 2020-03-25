@@ -194,5 +194,36 @@ namespace QuadribolPresentationLayer.Controllers
 
             return RedirectToAction("Login", "Usuario");
         }
+
+        public async Task<IActionResult> CadastrarTemporario()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CadastrarTemporario(UsuarioInsertViewModel viewModel)
+        {
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<UsuarioInsertViewModel, Usuario>();
+            });
+            IMapper mapper = configuration.CreateMapper();
+            Usuario usuario = mapper.Map<Usuario>(viewModel);
+
+            usuario.EhAtivo = true;
+
+            try
+            {
+                await this._usuarioService.Insert(usuario);
+                return RedirectToAction("Login", "Usuario");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Errors = ex.Message;
+            }
+
+            return View();
+        }
+
     }
 }
