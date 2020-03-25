@@ -27,10 +27,10 @@ namespace DAO
             {
                 return null;
             }
-            //else if (user.EhAtivo == false)
-            //{
-            //    return null;
-            //}
+            else if (user.EhAtivo == false)
+            {
+                return null;
+            }
             return user;
         }
 
